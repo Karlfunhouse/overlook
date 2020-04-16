@@ -70,33 +70,33 @@ form {
       font-size: 1em;
       outline: none;
       padding: 10px;
-      margin:20px;
-      color:white;
-      height:30px;
-      width:70%;
+      margin: 20px;
+      color: white;
+      height: 30px;
+      width: 70%;
       border-radius: 40px;
       transition: 0.2s ease-in;
     }
 }
 
 form input[type="submit"]{
-    border: solid 2px $sky-blue;
+    border: 2px solid $sky-blue;
     box-sizing: border-box;
-    height:50px;
-    width:40%;
+    height: 50px;
+    width: 40%;
     cursor: pointer;
 }
 
 form input[type="text"]:focus,
 form input[type="password"]:focus{
-  opacity: 1;
-  width:80%;
-  border:solid 2px $sky-blue;
+  width: 80%;
+  border: 2px solid $sky-blue;
 }
 
-form input[type="submit"]:hover{
-  opacity: 1;
+form input[type="submit"]:hover,
+form input[type="submit"]:focus {
   background: $sky-blue;
+  border: 1px white solid;
   color: white;
 }
 
