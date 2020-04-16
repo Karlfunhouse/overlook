@@ -1,10 +1,29 @@
 //variables
 $moon-white: #FFEFD8;
-// $sky-blue:
+$sky-blue: #195B8C;
 
 
 * {
   font-family: 'Cinzel', serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  background-image: url('../images/Background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 nav {
@@ -12,22 +31,73 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-    h1 {
-      font-size: 4vh;
-      margin-right: 3%;
+  width: 100%;
+  h1 {
+    font-size: 7vh;
+    justify-content: flex-end;
+    margin-right: 3%;
+  }
+  button {
+    justify-content: flex-start;
+    background: none;
+    border: none;
+    margin-left: 3%
+  }
+}
+
+form {
+  background: #262626;
+  opacity: .77;
+  padding: 10px;
+  margin-top: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  width: 300px;
+  height: 400px;
+    h2 {
+      margin-top:20px;
+      font-size: 55px;
+      color:white;
+      margin-bottom: 20px;
     }
-    button {
+    input {
+      border: 1px solid;
       background: none;
-      border: none;
+      opacity: 1;
+      text-align: center;
+      font-size: 1em;
+      outline: none;
+      padding: 10px;
+      margin:20px;
+      color:white;
+      height:30px;
+      width:70%;
+      border-radius: 40px;
+      transition: 0.2s ease-in;
     }
 }
 
+form input[type="submit"]{
+    border: solid 2px $sky-blue;
+    box-sizing: border-box;
+    height:50px;
+    width:40%;
+    cursor: pointer;
+}
 
+form input[type="text"]:focus,
+form input[type="password"]:focus{
+  opacity: 1;
+  width:80%;
+  border:solid 2px $sky-blue;
+}
 
-body {
-  background-image: url('../images/Background.jpg');
-  background-repeat: no-repeat;
-  background-size: 100%;
+form input[type="submit"]:hover{
+  opacity: 1;
+  background: $sky-blue;
+  color: white;
 }
 
 .hotel-title-words {
