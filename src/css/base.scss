@@ -79,7 +79,7 @@ form {
     }
 }
 
-form input[type="submit"]{
+form input[type="submit"] {
     border: 2px solid $sky-blue;
     box-sizing: border-box;
     height: 50px;
@@ -87,8 +87,7 @@ form input[type="submit"]{
     cursor: pointer;
 }
 
-form input[type="text"]:focus,
-form input[type="password"]:focus{
+form input[type="text"]:focus {
   width: 80%;
   border: 2px solid $sky-blue;
 }
