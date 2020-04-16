@@ -1,6 +1,35 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+//variables
+$moon-white: #FFEFD8;
+// $sky-blue:
+
+
+* {
+  font-family: 'Cinzel', serif;
+}
+
+nav {
+  color: $moon-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    h1 {
+      font-size: 4vh;
+      margin-right: 3%;
+    }
+    button {
+      background: none;
+      border: none;
+    }
+}
+
+
 
 body {
-  background-color: $primary-background;
+  background-image: url('../images/Background.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.hotel-title-words {
+  font-size: 3vh;
 }
