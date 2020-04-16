@@ -46,7 +46,7 @@ class Hotel {
     return todaysRevenue
   }
 
-  findPercentageOfOccupiedRooms(date) {
+  findPercentageOfOccupiedRooms() {
     let numberOfRoomsBookedToday = this.bookings.filter(booking => booking.date === this.date).length
     let percentageOfOccupiedRooms = +((numberOfRoomsBookedToday/this.rooms.length).toFixed(2) * 100)
     // domUpdates.displayPercentageOfOccupiedRooms(percentageOfOccupiedRooms)
