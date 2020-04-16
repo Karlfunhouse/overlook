@@ -17,7 +17,8 @@ import './images/moon-icon.svg'
 let usersData;
 let roomsData;
 let bookingsData;
-let allGuests
+let allGuests;
+let date;
 
 usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
   .then(data => data.json())
@@ -42,6 +43,41 @@ Promise.all([usersData, roomsData, bookingsData])
   })
   .then(hotelData => {
     hotelData = new Hotel(hotelData.rooms, hotelData.bookings, date);
-    populateGuestView(hotelData);
-    populateManagerView(date);
+    // populateGuestView(hotelData);
+    // populateManagerView(date);
   })
+  .catch(error => {
+    console.log('Something is amiss with promise all', error)
+  });
+
+function instantiateUser(userType, id) {
+  if (userType === 'manager') {
+    manager = new Manager(users, )
+  } else {
+
+  }
+}
+
+//EVENTS
+$('.login-submit-js').on('click', (event) => checkLogin());
+
+//LOGIN
+function checkLogin() {
+  event.preventDefault();
+  let userName = $('.username-js').val().toLowerCase();
+  if (userName.toLowerCase() === 'manager' && $('.password-js').val() === 'overlook2020') {
+    //load manager page
+    instantiateUser('manager')
+  } else if ((userName.includes('customer') && $('.password-js').val() === 'overlook2020')) {
+    let splitUserName = userName.split('customer');
+    let guestId = splitUserName[1];
+    instantiateUser('customer', guestId)
+    //do guest stuff
+  } else {
+    //display login error
+  }
+}
+
+function loadGuestPage() {
+
+}
