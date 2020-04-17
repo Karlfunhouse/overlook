@@ -9,6 +9,7 @@ import $ from 'jquery';
 import Hotel from './Hotel';
 import Guest from './Guest';
 import Manager from './Manager';
+import domUpdates from './domUpdates'
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/moon-icon.svg'
@@ -17,45 +18,64 @@ import './images/moon-icon.svg'
 let usersData;
 let roomsData;
 let bookingsData;
-let allGuests;
+let guests;
+let rooms;
+let bookings;
+let hotel;
 let date;
+let manager;
+let guest;
 
-usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
-  .then(data => data.json())
-  .catch(error => console.log('userData error'))
+//FETCH
+function fetchAllData(userType, guestId) {
+  usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+    .then(data => data.json())
+    .catch(error => console.log('userData error'))
 
-roomsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
-  .then(data => data.json())
-  .catch(error => console.log('roomsData error'))
+  roomsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+    .then(data => data.json())
+    .catch(error => console.log('roomsData error'))
 
-bookingsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
-  .then(data => data.json())
-  .catch(error => console.log('bookingsData error'))
+  bookingsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+    .then(data => data.json())
+    .catch(error => console.log('bookingsData error'))
 
-let hotelData = {'rooms': [], 'bookings': []};
-Promise.all([usersData, roomsData, bookingsData])
-  .then(data => {
-    console.log('data',data);
-    allGuests = data[0];
-    hotelData['rooms'] = data[1];
-    hotelData['bookings'] = data[2];
-    return hotelData
+  Promise.all([usersData, roomsData, bookingsData])
+    .then(data => {
+      console.log('data',data);
+      guests = data[0];
+      console.log(guests);
+      rooms = data[1];
+      bookings = data[2];
+      return guests
+    })
+    .then(() => {
+      hotel = new Hotel(rooms, bookings, "2020/02/04");
+      console.log('hotel', hotel);
+      if(userType === 'manager') {
+        let manager = new Manager(guest.id, 'Boss', rooms, bookings)
+        // loadManagerPage(date)
+        console.log(manager);
+      } else {
+        instantiateGuest(guests, rooms, bookings, guestId)
+        // let guest = guests.users.find(guest => guest.id === +guestId)
+        // let guestBookings = bookings.bookings.filter(booking => booking.userID === +guestId)
+        // let guestRooms = []
+        // let bookingInfo = guestBookings.forEach(booking => {
+        //   rooms.rooms.forEach(room => {
+        //     if (room.number === booking.roomNumber) {
+        //       // booking.roomInfo = {room}
+        //       guestRooms.push(room)
+        //     }
+        //   })
+        // })
+        // let currentGuest = new Guest(guest.id, guest.name, guestRooms, guestBookings)
+        // console.log('currentGuest', currentGuest);
+    }
   })
-  .then(hotelData => {
-    hotelData = new Hotel(hotelData.rooms, hotelData.bookings, date);
-    // populateGuestView(hotelData);
-    // populateManagerView(date);
-  })
-  .catch(error => {
-    console.log('Something is amiss with promise all', error)
-  });
-
-function instantiateUser(userType, id) {
-  if (userType === 'manager') {
-    manager = new Manager(users, )
-  } else {
-
-  }
+    .catch(error => {
+      console.log('Something is amiss with promise all', error)
+    })
 }
 
 //EVENTS
@@ -66,18 +86,49 @@ function checkLogin() {
   event.preventDefault();
   let userName = $('.username-js').val().toLowerCase();
   if (userName.toLowerCase() === 'manager' && $('.password-js').val() === 'overlook2020') {
+    // let manager
+    fetchAllData(manager);
     //load manager page
-    instantiateUser('manager')
+    // instantiateUser('manager')
   } else if ((userName.includes('customer') && $('.password-js').val() === 'overlook2020')) {
+    // let guest;
     let splitUserName = userName.split('customer');
     let guestId = splitUserName[1];
-    instantiateUser('customer', guestId)
+    fetchAllData(guest, guestId)
+    // loadGuestPage(guestId, guests)
+    // instantiateUser('customer')
     //do guest stuff
   } else {
     //display login error
   }
 }
+function instantiateGuest(guests, rooms, bookings, guestId) {
+  let guest = guests.users.find(guest => guest.id === +guestId)
+  let guestBookings = bookings.bookings.filter(booking => booking.userID === +guestId)
+  let guestRooms = []
+  let bookingInfo = guestBookings.forEach(booking => {
+    rooms.rooms.forEach(room => {
+      if (room.number === booking.roomNumber) {
+        // booking.roomInfo = {room}
+        guestRooms.push(room)
+      }
+    })
+  })
+  let currentGuest = new Guest(guest.id, guest.name, guestRooms, guestBookings)
+  console.log('currentGuest', currentGuest);
+  return currentGuest
 
-function loadGuestPage() {
+}
+
+
+function loadGuestPage(guestId, guests) {
+  // console.log(guestId);
+  // let currentGuest = guests.users.find(guest => guest.id === guestId)
+  // console.log(currentGuest);
+
+  // guest = new Guest (currentGuest.id, currentGuest.name, rooms, bookings)
+}
+
+function loadManagerPage() {
 
 }
