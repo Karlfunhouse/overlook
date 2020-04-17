@@ -1,19 +1,23 @@
 import Guest from '../src/Guest';
+import domUpdates from './domUpdates'
+
 
 class Manager extends Guest {
-  constructor(user, name, hotelData) {
-    super(id, name, hotelData);
-    this.id = user.id;
-    this.name = user.name;
-    this.hotelData = hotelData;
+  constructor(id, name, rooms, bookings) {
+    super(id, name, rooms, bookings);
+    this.id = id;
+    this.name = name;
+    this.bookings = bookings;
+    this.rooms = rooms;
   }
 
   deleteBooking() {
 
   }
 
-  findGuestById() {
-    
+  findGuestByName(name) {
+
+
   }
 
 
