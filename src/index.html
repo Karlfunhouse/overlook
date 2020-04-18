@@ -12,12 +12,21 @@
       </nav>
     </header>
     <main>
-      <form>
+      <form class="login-form">
         <h2>Welcome</h2>
         <input type="text" class="username-js" name="Username" placeholder="Username" autocomplete="false">
         <input type="text" class="password-js" name="Password" placeholder="Password">
         <input type="submit" class="login-submit-js" value="Submit">
+        <p class='login-error'></p>
       </form>
+      <section class="user-dashboard hide">
+          <div class="user-welcome-box">
+            <h2 class="user-name"></h2>
+            <h2 class="money-spent"></h2>
+          </div>
+          <div class="my-bookings"><span class="bookings-header">Your Bookings</span></div>
+
+      </section>
     </main>
 
   </body>
