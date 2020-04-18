@@ -1,6 +1,7 @@
 //variables
 $moon-white: #FFEFD8;
 $sky-blue: #195B8C;
+$dark-blue: #082244;
 
 
 * {
@@ -70,36 +71,96 @@ form {
       font-size: 1em;
       outline: none;
       padding: 10px;
-      margin:20px;
-      color:white;
-      height:30px;
-      width:70%;
+      margin: 20px;
+      color: white;
+      height: 30px;
+      width: 70%;
       border-radius: 40px;
       transition: 0.2s ease-in;
     }
 }
 
-form input[type="submit"]{
-    border: solid 2px $sky-blue;
+form input[type="submit"] {
+    border: 2px solid $sky-blue;
     box-sizing: border-box;
-    height:50px;
-    width:40%;
+    height: 50px;
+    width: 40%;
     cursor: pointer;
 }
 
-form input[type="text"]:focus,
-form input[type="password"]:focus{
-  opacity: 1;
-  width:80%;
-  border:solid 2px $sky-blue;
+form input[type="text"]:focus {
+  width: 80%;
+  border: 2px solid $sky-blue;
 }
 
-form input[type="submit"]:hover{
-  opacity: 1;
+form input[type="submit"]:hover,
+form input[type="submit"]:focus {
   background: $sky-blue;
+  border: 1px white solid;
   color: white;
 }
 
 .hotel-title-words {
   font-size: 3vh;
+}
+
+.user-dashboard {
+  border: 3px solid red;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.login-error {
+  color: red;
+}
+
+.user-welcome-box {
+  background: $dark-blue;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name,
+.money-spent {
+
+  display: flex;
+  justify-content: center;
+
+}
+
+// .money-spent {
+//
+// }
+
+.my-bookings {
+  background: $dark-blue;
+  color: white;
+  text-align: center;
+  border: 1px white solid;
+  width: 100%;
+  height: 500px;
+  overflow: scroll;
+    span {
+      font-weight: 700;
+      font-size: 2em;
+    }
+}
+
+.hide {
+  display: none;
+}
+
+.booking {
+  border-bottom: 2px white solid;
+  padding-bottom: 2px;
+  margin-top: 2%;
+  font-size: 1em;
+  // display: flex;
+
 }
