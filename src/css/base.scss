@@ -102,3 +102,37 @@ form input[type="submit"]:focus {
 .hotel-title-words {
   font-size: 3vh;
 }
+
+.user-dashboard {
+  border: 3px solid red;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.login-error {
+  color: red;
+}
+
+.user-welcome-box {
+  display: flex;
+}
+
+.user-name {
+
+}
+
+.money-spent {
+
+}
+
+.my-bookings {
+  width: 50%;
+  height: 50%;
+}
+
+.hide {
+  display: none;
+}
