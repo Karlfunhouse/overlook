@@ -93,6 +93,7 @@ function guestFetch(guestId) {
     })
     .then(() => {
       hotel = new Hotel(rooms, bookings, "2020/02/04");
+      hotel.setUpHotel()
       console.log('hotel', hotel);
     })
     .then(() => {
@@ -122,7 +123,6 @@ function instantiateGuest(guests, rooms, bookings, guestId) {
       }
     })
   })
-  console.log('bookingInfo', guestBookings);
   let currentGuest = new Guest(guest.id, guest.name, guestBookings)
   // console.log('currentGuest', currentGuest);
   // domUpdates.loadGuestPage(currentGuest)
@@ -131,11 +131,11 @@ function instantiateGuest(guests, rooms, bookings, guestId) {
 
 function displayGuestPage(guest) {
   guest.findFirstName()
-  console.log('firstName', guest.findFirstName())
+  // console.log('firstName', guest.findFirstName())
   guest.findMyBookings();
-  console.log('bookings', guest.findMyBookings());
+  // console.log('bookings', guest.findMyBookings());
   guest.calculateTotalSpent();
-  console.log('total spent', guest.calculateTotalSpent());
+  // console.log('total spent', guest.calculateTotalSpent());
   domUpdates.hideLoginMenu();
   domUpdates.showGuestPage();
 }
