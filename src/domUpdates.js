@@ -11,8 +11,16 @@ let domUpdates = {
     $('.password-js').val('password');
   },
 
+  hideLoginMenu() {
+    $('.login-form').addClass('hide')
+  },
+
   loadManagerPage() {
 
+  },
+
+  showGuestPage() {
+    $('.user-dashboard').removeClass('hide');
   },
 //Hotel
   displayTodaysBookings(todaysBookings) {
@@ -45,7 +53,8 @@ let domUpdates = {
         <h4>${booking.date}<h4>
         <h3>${booking.roomNumber}</h3>
       </article>`
-    }))
+    })
+  )
   },
 
   displayTotalSpent(totalMoneySpent) {
