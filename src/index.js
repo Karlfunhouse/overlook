@@ -117,11 +117,13 @@ function instantiateGuest(guests, rooms, bookings, guestId) {
   let bookingInfo = guestBookings.forEach(booking => {
     rooms.rooms.forEach(room => {
       if (room.number === booking.roomNumber) {
-        guestRooms.push(room)
+        // guestRooms.push(room)
+        booking.roomInfo = room
       }
     })
   })
-  let currentGuest = new Guest(guest.id, guest.name, guestRooms, guestBookings)
+  console.log('bookingInfo', guestBookings);
+  let currentGuest = new Guest(guest.id, guest.name, guestBookings)
   // console.log('currentGuest', currentGuest);
   // domUpdates.loadGuestPage(currentGuest)
   return currentGuest
@@ -134,6 +136,8 @@ function displayGuestPage(guest) {
   console.log('bookings', guest.findMyBookings());
   guest.calculateTotalSpent();
   console.log('total spent', guest.calculateTotalSpent());
+  domUpdates.hideLoginMenu();
+  domUpdates.showGuestPage();
 }
 
 
