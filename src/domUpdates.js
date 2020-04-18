@@ -48,17 +48,22 @@ let domUpdates = {
   },
 
   displayMyBookings(myBookings) {
-    $('.my-bookings').html(myBookings.forEach(booking => {
+    myBookings.forEach(booking => {
+      $('.my-bookings').append(
       `<article id=${booking.id} class='booking'>
-        <h4>${booking.date}<h4>
-        <h3>${booking.roomNumber}</h3>
-      </article>`
+        <h4>Date: ${booking.date}<h4>
+        <h3>Room #: ${booking.roomNumber}</h3>
+        <h3>Room Type: ${booking.roomInfo.roomType}</h3>
+        <h3>Bed Size: ${booking.roomInfo.bedSize}</h3>
+        <h3># of Beds: ${booking.roomInfo.numBeds}</h3>
+        <h3>$/Night: ${booking.roomInfo.costPerNight}</h3>
+        <h3>Bidet: ${booking.roomInfo.bidet}</h3>
+      </article>`)
     })
-  )
   },
 
   displayTotalSpent(totalMoneySpent) {
-    $('.money-spent').text(`$${totalMoneySpent}`)
+    $('.money-spent').text(`You have spent $${totalMoneySpent} at Casa de la Luna`)
   },
 
 
