@@ -19,17 +19,17 @@ class Guest {
   findMyBookings() {
     let myBookings = this.bookings.filter(booking => booking.userID === this.id)
     domUpdates.displayMyBookings(myBookings);
-    // console.log(myBookings);
     return myBookings
   }
 
   calculateTotalSpent() {
-    let totalMoneySpent = this.findMyBookings().reduce((totalSpent, booking) => {
+    let totalMoneySpent = this.bookings.filter(booking => booking.userID === this.id)
+    .reduce((totalSpent, booking) => {
       totalSpent += booking.roomInfo.costPerNight
       return totalSpent
     }, 0)
-    domUpdates.displayTotalSpent(+totalMoneySpent)
-    return +totalMoneySpent
+    domUpdates.displayTotalSpent(totalMoneySpent.toFixed(2))
+    return +totalMoneySpent.toFixed(2)
   }
 
   bookARoom() {
