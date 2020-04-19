@@ -14,7 +14,8 @@ class Hotel {
     this.sortBookingsByDate();
     this.findTodaysBookings();
     this.findTotalAvailableRooms();
-    this.findOpenRooms();
+    this.findAvailableRooms();
+    this.findAvailableRoomNumbers();
     this.findTotalRevenueForToday();
     this.findPercentageOfOccupiedRooms();
   }
@@ -65,7 +66,22 @@ class Hotel {
     return availableRooms
   }
 
-  findOpenRooms() {
+  findAvailableRooms() {
+    let todaysBookings = this.bookings.bookings.filter(booking => booking.date === this.date)
+    let todaySortedBookings = todaysBookings.sort((a, b) => a.roomNumber - b.roomNumber)
+    let todaysBookedRooms = todaySortedBookings.map(booking => booking.roomNumber)
+    let todaysOpenRooms = [];
+    this.rooms.rooms.forEach(room => {
+      if (!todaysBookedRooms.includes(room.number)) {
+        todaysOpenRooms.push(room)
+      }
+    })
+    console.log('available rooms', todaysOpenRooms);
+    domUpdates.displayAvailableRooms(todaysOpenRooms)
+    return todaysOpenRooms
+  }
+
+  findAvailableRoomNumbers() {
     let todaysBookings = this.bookings.bookings.filter(booking => booking.date === this.date)
     let todaySortedBookings = todaysBookings.sort((a, b) => a.roomNumber - b.roomNumber)
     let todaysBookedRooms = todaySortedBookings.map(booking => booking.roomNumber)
@@ -75,6 +91,7 @@ class Hotel {
         todaysOpenRooms.push(room.number)
       }
     })
+    console.log(todaysOpenRooms);
     domUpdates.displayOpenRoomsForToday(todaysOpenRooms)
     return todaysOpenRooms
   }
