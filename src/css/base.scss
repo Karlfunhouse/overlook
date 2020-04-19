@@ -192,3 +192,34 @@ form input[type="submit"]:focus {
   width: 250px;
   cursor: pointer;
 }
+
+.book-room-menu {
+  background-color: $sky-blue;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.date-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+   button {
+     color: $moon-white;
+     background-color: $dark-blue;
+     width: 100px;
+     height: 20px;
+     margin: 3% 0;
+   }
+}
+
+.roomtype-dropdown {
+  margin-top: 0;
+  height: 100%;
+  background-color: $sky-blue;
+}
