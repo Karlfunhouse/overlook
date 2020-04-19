@@ -46,6 +46,7 @@ nav {
   }
 }
 
+
 form {
   background: #262626;
   opacity: .77;
@@ -60,7 +61,7 @@ form {
     h2 {
       margin-top:20px;
       font-size: 55px;
-      color:white;
+      color:$moon-white;
       margin-bottom: 20px;
     }
     input {
@@ -72,13 +73,16 @@ form {
       outline: none;
       padding: 10px;
       margin: 20px;
-      color: white;
+      color: $moon-white;
       height: 30px;
       width: 70%;
       border-radius: 40px;
       transition: 0.2s ease-in;
     }
 }
+
+
+
 
 form input[type="submit"] {
     border: 2px solid $sky-blue;
@@ -96,8 +100,8 @@ form input[type="text"]:focus {
 form input[type="submit"]:hover,
 form input[type="submit"]:focus {
   background: $sky-blue;
-  border: 1px white solid;
-  color: white;
+  border: 1px $moon-white solid;
+  color: $moon-white;
 }
 
 .hotel-title-words {
@@ -106,7 +110,7 @@ form input[type="submit"]:focus {
 
 .user-dashboard,
 .manager-dashboard {
-  border: 3px solid red;
+  // border: 3px solid $moon-white;
   width: 1000px;
   height: 500px;;
   display: flex;
@@ -120,7 +124,7 @@ form input[type="submit"]:focus {
 
 .user-welcome-box {
   background: $dark-blue;
-  color: white;
+  color: $moon-white;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -134,21 +138,20 @@ form input[type="submit"]:focus {
   font-size: 2em;
 }
 
-
 .daily-hotel-stats {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 1%;
-  padding-bottom: 1%;
+  padding: 1%, 3%;
 }
 
 .my-bookings,
 .bookings-today {
   background: $dark-blue;
-  color: white;
+  color: $moon-white;
   text-align: center;
-  border: 1px white solid;
+  border: 1px $moon-white solid;
   width: 100%;
   height: 500px;
   overflow: scroll;
@@ -163,10 +166,29 @@ form input[type="submit"]:focus {
 }
 
 .booking {
-  border-bottom: 2px white solid;
+  border-bottom: 2px $moon-white solid;
   padding-bottom: 2px;
   margin-top: 2%;
   font-size: 1em;
-  // display: flex;
+}
 
+.book-room-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.book-a-room-display-button {
+  border: 2px solid $moon-white;
+  background-color: $sky-blue;
+  color: $moon-white;
+  font-size: 1.5em;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin: 1%;
+  padding: .5% .5%;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  width: 250px;
+  cursor: pointer;
 }
