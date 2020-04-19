@@ -25,7 +25,7 @@ class Guest {
   calculateTotalSpent() {
     let totalMoneySpent = this.bookings.filter(booking => booking.userID === this.id)
     .reduce((totalSpent, booking) => {
-      totalSpent += booking.roomInfo.costPerNight
+      totalSpent += booking.costPerNight
       return totalSpent
     }, 0)
     domUpdates.displayTotalSpent(totalMoneySpent.toFixed(2))
