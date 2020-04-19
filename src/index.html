@@ -12,6 +12,7 @@
       </nav>
     </header>
     <main>
+      <!-- LOGIN -->
       <form class="login-form">
         <h2>Welcome</h2>
         <input type="text" class="username-js" name="Username" placeholder="Username" autocomplete="false">
@@ -19,12 +20,27 @@
         <input type="submit" class="login-submit-js" value="Submit">
         <p class='login-error'></p>
       </form>
+      <!-- GUEST -->
       <section class="user-dashboard hide">
-          <div class="user-welcome-box">
-            <h2 class="user-name"></h2>
-            <h2 class="money-spent"></h2>
+        <div class="user-welcome-box">
+          <h2 class="user-name"></h2>
+          <h2 class="money-spent"></h2>
+        </div>
+        <div class="my-bookings"><span class="bookings-header">Your Bookings</span></div>
+      </section>
+      <!-- MANAGER -->
+      <section class="manager-dashboard hide">
+        <div class="user-welcome-box">
+          <h2 class="user-name"></h2>
+          <div class="daily-hotel-stats">
+            <h2 class="available-rooms"></h2>
+            <h2 class="todays-revenue"></h2>
+            <h2 class="occupied-rooms-percentage"></h2>
           </div>
-          <div class="my-bookings"><span class="bookings-header">Your Bookings</span></div>
+        </div>
+        <div>
+          <div class="bookings-today">Today's Bookings</div>
+        </div>
 
       </section>
     </main>
