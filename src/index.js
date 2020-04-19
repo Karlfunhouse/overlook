@@ -36,6 +36,7 @@ function checkLogin() {
 
 //FETCH
 function managerFetch() {
+  console.log('managerfetch');
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .catch(error => console.log('userData error'))
@@ -59,10 +60,12 @@ function managerFetch() {
     })
     .then(() => {
       hotel = new Hotel(rooms, bookings, "2020/02/04");
-      console.log('hotel', hotel);
+      hotel.setUpHotel();
+  })
+    .then(() => {
       let manager = new Manager(0, 'Boss', rooms, bookings)
-      console.log(manager);
-      //Load Manager Page
+      // console.log(manager);
+      displayManagerPage();
   })
     .catch(error => {
       console.log('Something is amiss with promise all', error)
@@ -70,6 +73,7 @@ function managerFetch() {
 }
 
 function guestFetch(guestId) {
+  console.log('guestfetch');
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .catch(error => console.log('userData error'))
@@ -93,12 +97,12 @@ function guestFetch(guestId) {
     })
     .then(() => {
       hotel = new Hotel(rooms, bookings, "2020/02/04");
-      hotel.setUpHotel()
-      console.log('hotel', hotel);
+      hotel.setUpHotel();
+      // console.log('hotel', hotel);
     })
     .then(() => {
       let guest = instantiateGuest(guests, rooms, bookings, guestId)
-      console.log('100', guest)
+      // console.log('100', guest)
       displayGuestPage(guest)
     })
     .catch(error => {
@@ -124,24 +128,18 @@ function instantiateGuest(guests, rooms, bookings, guestId) {
     })
   })
   let currentGuest = new Guest(guest.id, guest.name, guestBookings)
-  // console.log('currentGuest', currentGuest);
-  // domUpdates.loadGuestPage(currentGuest)
   return currentGuest
 }
 
 function displayGuestPage(guest) {
   guest.findFirstName()
-  // console.log('firstName', guest.findFirstName())
   guest.findMyBookings();
-  // console.log('bookings', guest.findMyBookings());
   guest.calculateTotalSpent();
-  // console.log('total spent', guest.calculateTotalSpent());
   domUpdates.hideLoginMenu();
   domUpdates.showGuestPage();
 }
 
-
-
-function loadManagerPage() {
-
+function displayManagerPage() {
+  domUpdates.hideLoginMenu();
+  domUpdates.showManagerPage();
 }

@@ -126,6 +126,14 @@ beforeEach(() => {
     "costPerNight": 397.02
   },
   {
+  "number": 80,
+  "roomType": "suite",
+  "bidet": false,
+  "bedSize": "full",
+  "numBeds": 2,
+  "costPerNight": 477.38
+  },
+  {
     "number": 15,
     "roomType": "junior suite",
     "bidet": true,
@@ -156,14 +164,14 @@ describe('Hotel', () => {
   })
 
   it('should be able to find Available Rooms', () => {
-    expect(hotel.findTotalAvailableRooms().length).to.equal(4)
+    expect(hotel.findTotalAvailableRooms()).to.equal(9)
   })
 
   it('should be able to calculate total revenue for the day', () => {
     expect(hotel.findTotalRevenueForToday()).to.equal(397.02)
   })
 
-  it('should be able to calculate percentage of occupied rooms', () => {
-    expect(hotel.findPercentageOfOccupiedRooms()).to.equal(11)
+  it.only('should be able to calculate percentage of occupied rooms', () => {
+    expect(hotel.findPercentageOfOccupiedRooms()).to.equal(10)
   })
 })
