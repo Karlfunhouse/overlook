@@ -4,6 +4,7 @@ import Hotel from './Hotel';
 import Guest from './Guest';
 import Manager from './Manager';
 import domUpdates from './domUpdates'
+// import datepicker from 'js-datepicker'
 
 import './images/moon-icon.svg'
 
@@ -63,7 +64,7 @@ function managerFetch() {
       hotel.setUpHotel();
   })
     .then(() => {
-      let manager = new Manager(0, 'Boss', rooms, bookings)
+      instantiateManager(rooms, bookings)
       // console.log(manager);
       displayManagerPage();
   })
@@ -118,17 +119,41 @@ $('.login-submit-js').on('click', (event) => checkLogin());
 function instantiateGuest(guests, rooms, bookings, guestId) {
   let guest = guests.users.find(guest => guest.id === +guestId)
   let guestBookings = bookings.bookings.filter(booking => booking.userID === +guestId)
-  let guestRooms = []
+  // let guestRooms = []
   let bookingInfo = guestBookings.forEach(booking => {
     rooms.rooms.forEach(room => {
       if (room.number === booking.roomNumber) {
         // guestRooms.push(room)
-        booking.roomInfo = room
+        booking.roomType = room.roomType,
+        booking.bidet = room.bidet,
+        booking.bedSize = room.bedSize,
+        booking.numBeds = room.numBeds,
+        booking.costPerNight = room.costPerNight
       }
     })
   })
   let currentGuest = new Guest(guest.id, guest.name, guestBookings)
   return currentGuest
+}
+
+function instantiateManager(rooms, bookings) {
+  let bookingInfo = bookings.bookings.forEach(booking => {
+    // console.log('booking', booking);
+    rooms.rooms.forEach(room => {
+      if (room.number === booking.roomNumber) {
+        booking.roomType = room.roomType,
+        booking.bidet = room.bidet,
+        booking.bedSize = room.bedSize,
+        booking.numBeds = room.numBeds,
+        booking.costPerNight = room.costPerNight
+        // console.log('booking', booking);
+      }
+    })
+  })
+  console.log('bookings', bookings);
+  let manager = new Manager(0, 'Boss', rooms, bookings)
+  console.log('new manager', manager);
+  return manager
 }
 
 function displayGuestPage(guest) {
