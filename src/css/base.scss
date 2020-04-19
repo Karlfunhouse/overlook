@@ -104,10 +104,11 @@ form input[type="submit"]:focus {
   font-size: 3vh;
 }
 
-.user-dashboard {
+.user-dashboard,
+.manager-dashboard {
   border: 3px solid red;
-  width: 100%;
-  height: 100%;
+  width: 1000px;
+  height: 500px;;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -128,17 +129,22 @@ form input[type="submit"]:focus {
 
 .user-name,
 .money-spent {
-
   display: flex;
   justify-content: center;
-
+  font-size: 2em;
 }
 
-// .money-spent {
-//
-// }
 
-.my-bookings {
+.daily-hotel-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  padding-bottom: 1%;
+}
+
+.my-bookings,
+.bookings-today {
   background: $dark-blue;
   color: white;
   text-align: center;
