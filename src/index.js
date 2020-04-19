@@ -113,6 +113,8 @@ function guestFetch(guestId) {
 
 //EVENTS
 $('.login-submit-js').on('click', (event) => checkLogin());
+$('.book-a-room-button').on('click', (event) => domUpdates.showBookingPage());
+$('.moon-icon-js').on('click', (event) => domUpdates.logOut());
 
 
 
@@ -146,13 +148,10 @@ function instantiateManager(rooms, bookings) {
         booking.bedSize = room.bedSize,
         booking.numBeds = room.numBeds,
         booking.costPerNight = room.costPerNight
-        // console.log('booking', booking);
       }
     })
   })
-  console.log('bookings', bookings);
   let manager = new Manager(0, 'Boss', rooms, bookings)
-  console.log('new manager', manager);
   return manager
 }
 
@@ -167,4 +166,9 @@ function displayGuestPage(guest) {
 function displayManagerPage() {
   domUpdates.hideLoginMenu();
   domUpdates.showManagerPage();
+}
+
+function displayBookingMenu() {
+  console.log('book button clicked');
+  domUpdates.showBookingPage()
 }
