@@ -102,6 +102,20 @@ let domUpdates = {
     $('.money-spent').text(`You have spent $${totalMoneySpent} at Casa de la Luna`)
   },
 
+  displayAvailableRooms(todaysOpenRooms) {
+    todaysOpenRooms.forEach(room => {
+      $('.available-bookings').append(
+        `<h3>Room #: ${room.number}</h3>
+        <h3>Room Type: ${room.roomType}</h3>
+        <h3>Bed Size: ${room.bedSize}</h3>
+        <h3># of Beds: ${room.numBeds}</h3>
+        <h3>$/Night: ${room.costPerNight}</h3>
+        <h3>Bidet: ${room.bidet}</h3>`
+      )
+
+    })
+  },
+
 
 }
 
