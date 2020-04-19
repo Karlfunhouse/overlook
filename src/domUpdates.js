@@ -23,6 +23,20 @@ let domUpdates = {
   showGuestPage() {
     $('.user-dashboard').removeClass('hide');
   },
+
+  showBookingPage() {
+    $('.user-dashboard').addClass('hide');
+    $('.manager-dashboard').addClass('hide');
+    $('.booking-display').removeClass('hide');
+  },
+
+  logOut() {
+    $('.user-dashboard').addClass('hide');
+    $('.manager-dashboard').addClass('hide');
+    $('.booking-display').addClass('hide');
+    $('.login-form').removeClass('hide')
+  },
+
 //Hotel
   displayTodaysBookings(todaySortedBookings) {
     todaySortedBookings.forEach(booking => {
