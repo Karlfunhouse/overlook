@@ -172,3 +172,7 @@ function displayBookingMenu() {
   console.log('book button clicked');
   domUpdates.showBookingPage()
 }
+
+function findAvailableRooms() {
+  let date = $('.selected-date').val()
+}
