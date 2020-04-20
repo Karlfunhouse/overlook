@@ -37,6 +37,11 @@
       <section class="manager-dashboard hide">
         <div class="user-welcome-box">
           <h2 class="user-name"></h2>
+          <div class="date-menu">
+            <h3>Search Bookings By Date</h3>
+            <input type="date" class="selected-date-manager" >
+            <button class="search-booking-manager">Search</button>
+          </div>
           <div class="daily-hotel-stats">
             <div class="availability">
               <h2 class="available-rooms"></h2>
@@ -55,27 +60,29 @@
       </section>
 
       <section class="booking-display hide">
-        <article class="book-room-menu" id="customer-bookings-js">
+        <article class="book-room-menu">
           <h2 class="booking-title">Book Your Next Stay</h2>
             <section class="booking-filters">
               <div class="date-menu">
-                <input type="date" class="selected-date">
-                <button class="search-booking">Search Date</button>
+                <input type="date" class="selected-date" >
+                <button class="search-booking">Search</button>
               </div>
               <!-- <div id="booking-error">
               </div> -->
-              <form class="roomtype-dropdown">
-                <select name="room-type" id="roomtype-dropdown-js">
+              <!-- class="roomtype-dropdown" -->
+              <form class="roomtype-menu">
+                <select name="room-type" class="roomtype-dropdown">
                   <option value="residential suite">Residential Suite</option>
                   <option value="suite">Suite</option>
                   <option value="single room">Single Room</option>
                   <option value="junior suite">Junior Suite</option>
                 </select>
+                <button class="filter-room-type-button" type="button">Filter</button>
               </form>
+              <h3 class="booking-title">Available Rooms</h3>
             </section>
             <section class="rooms-available">
-              <h2>Available Rooms<h2>
-              <div class="available-bookings" id="available-bookings-js">
+              <div class="available-bookings">
               </div>
             </section>
           </article>
