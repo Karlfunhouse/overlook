@@ -109,13 +109,15 @@ form input[type="submit"]:focus {
 }
 
 .user-dashboard,
-.manager-dashboard {
+.manager-dashboard,
+.booking-display {
   // border: 3px solid $moon-white;
   width: 1000px;
   height: 500px;;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
 }
 
 .login-error {
@@ -152,7 +154,7 @@ form input[type="submit"]:focus {
   color: $moon-white;
   text-align: center;
   border: 1px $moon-white solid;
-  width: 100%;
+  width: 1000px;
   height: 500px;
   overflow: scroll;
     span {
@@ -163,6 +165,13 @@ form input[type="submit"]:focus {
 
 .hide {
   display: none;
+}
+
+.booking-title {
+  color: $moon-white;
+  padding: 2%;
+  text-align: center;
+
 }
 
 .booking {
@@ -194,14 +203,14 @@ form input[type="submit"]:focus {
 }
 
 .book-room-menu {
-  background-color: $sky-blue;
+  background-color: $dark-blue;
   border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  height: 600px;
+  width: 500px;
 }
 
 .date-menu {
@@ -212,14 +221,60 @@ form input[type="submit"]:focus {
    button {
      color: $moon-white;
      background-color: $dark-blue;
-     width: 100px;
-     height: 20px;
      margin: 3% 0;
+     height: 30px;
+     width: 130px;
+     font-size: 1em;
+     border-radius: 5px;
    }
+}
+
+.roomtype-menu{
+  margin-top: 0;
+  width: 250px;
+  height: 90px;
+  background-color: $sky-blue;
+  color: $moon-white;
 }
 
 .roomtype-dropdown {
   margin-top: 0;
-  height: 100%;
-  background-color: $sky-blue;
+  width: 250px;
+  background-color: $dark-blue;
+  color: $moon-white;
+  border: 1px solid $moon-white;
+  border-radius: 5px;
+  font-size: 1em;
+
+}
+
+.rooms-available {
+  width: 100%;
+  height: 1000px;
+  overflow: scroll;
+  display: flex;
+  justify-content: center;
+  color: $moon-white;
+}
+
+.filter-room-type-button {
+  background-color: $dark-blue;
+  color: $moon-white;
+  height: 30px;
+  width: 70px;
+  font-size: 1em;
+  border-radius: 5px;
+  margin: 1%;
+}
+
+.book-room-button,
+.cancel-booking-button {
+  background-color: $dark-blue;
+  color: $moon-white;
+  height: 30px;
+  width: 150px;
+  font-weight: 700;
+  font-size: 1em;
+  border-radius: 5px;
+  margin: 1%;
 }
