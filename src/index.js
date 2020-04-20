@@ -111,10 +111,41 @@ function guestFetch(guestId) {
     })
 }
 
+function hotelFetch(date) {
+  console.log('guestfetch');
+  usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+    .then(data => data.json())
+    .catch(error => console.log('userData error'))
+
+  roomsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+    .then(data => data.json())
+    .catch(error => console.log('roomsData error'))
+
+  bookingsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+    .then(data => data.json())
+    .catch(error => console.log('bookingsData error'))
+
+  Promise.all([usersData, roomsData, bookingsData])
+    .then(data => {
+      guests = data[0];
+      rooms = data[1];
+      bookings = data[2];
+    })
+    .then(() => {
+      hotel = new Hotel(rooms, bookings, date);
+      hotel.setUpHotel()
+      console.log('hotel', hotel);
+    })
+    .catch(error => {
+      console.log('Something is amiss with promise all', error)
+    })
+}
+
 //EVENTS
 $('.login-submit-js').on('click', (event) => checkLogin());
 $('.book-a-room-button').on('click', (event) => domUpdates.showBookingPage());
 $('.moon-icon-js').on('click', (event) => domUpdates.logOut());
+$('.search-booking').on('click', (event) => instantiateHotel());
 
 
 
@@ -155,6 +186,14 @@ function instantiateManager(rooms, bookings) {
   return manager
 }
 
+function instantiateHotel() {
+  let date = $('.selected-date').val().split('-').join('/')
+  // console.log('selected date', date);
+  hotelFetch(date)
+  // hotel.setUpHotel()
+  // console.log('hotel', hotel);
+}
+
 function displayGuestPage(guest) {
   guest.findFirstName()
   guest.findMyBookings();
@@ -173,6 +212,7 @@ function displayBookingMenu() {
   domUpdates.showBookingPage()
 }
 
-function findAvailableRooms() {
-  let date = $('.selected-date').val()
-}
+// function findAvailableRooms() {
+//   let date = $('.selected-date').val()
+//
+// }
