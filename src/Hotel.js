@@ -137,10 +137,6 @@ class Hotel {
     // console.log('sortedBookings', sortedBookings);
   }
 
-  bookARoom(date) {
-
-  }
-
 }
 
 
