@@ -2,6 +2,7 @@ import $ from 'jquery';
 import Hotel from '../src/Hotel';
 import Guest from '../src/Guest';
 import Manager from '../src/Guest';
+const moment = require('moment')
 
 let domUpdates = {
 
@@ -105,14 +106,15 @@ let domUpdates = {
   displayAvailableRooms(todaysOpenRooms) {
     todaysOpenRooms.forEach(room => {
       $('.available-bookings').append(
-        `<h3>Room #: ${room.number}</h3>
-        <h3>Room Type: ${room.roomType}</h3>
-        <h3>Bed Size: ${room.bedSize}</h3>
-        <h3># of Beds: ${room.numBeds}</h3>
-        <h3>$/Night: ${room.costPerNight}</h3>
-        <h3>Bidet: ${room.bidet}</h3>`
+        `<article class='booking'>
+          <h3>Room #: ${room.number}</h3>
+          <h3>Room Type: ${room.roomType}</h3>
+          <h3>Bed Size: ${room.bedSize}</h3>
+          <h3># of Beds: ${room.numBeds}</h3>
+          <h3>$/Night: ${room.costPerNight}</h3>
+          <h3>Bidet: ${room.bidet}</h3>
+        </article>`
       )
-
     })
   },
 
