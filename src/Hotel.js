@@ -7,7 +7,7 @@ class Hotel {
     this.rooms = rooms;
     this.bookings = bookings;
     this.date = date;
-    this.todaysBookings = this.findTodaysBookings;
+    this.todaysBookings = this.findTodaysBookings();
   }
 
   setUpHotel() {
@@ -91,7 +91,7 @@ class Hotel {
         todaysOpenRooms.push(room.number)
       }
     })
-    console.log(todaysOpenRooms);
+    console.log('todays open rooms', todaysOpenRooms);
     domUpdates.displayOpenRoomsForToday(todaysOpenRooms)
     return todaysOpenRooms
   }
@@ -113,15 +113,21 @@ class Hotel {
   findPercentageOfOccupiedRooms() {
     let numberOfRoomsBookedToday = this.bookings.bookings.filter(booking => booking.date === this.date).length
     let percentageOfOccupiedRooms = +((numberOfRoomsBookedToday/this.rooms.rooms.length).toFixed(2) * 100)
-    domUpdates.displayPercentageOfOccupiedRooms(percentageOfOccupiedRooms)
+    domUpdates.displayPercentageOfOccupiedRooms(percentageOfOccupiedRooms.toFixed())
     console.log('%', percentageOfOccupiedRooms);
-    return percentageOfOccupiedRooms
+    return percentageOfOccupiedRooms.toFixed()
   }
 
   filterRoomsByType(roomType) {
-    let filteredRooms = this.rooms.rooms.filter(room => room.roomType === roomType)
-    domUpdates.displayFilteredRoomsByType(filteredRooms)
-    return filteredRooms
+    let availableRooms = this.findAvailableRooms()
+    let filteredRooms = availableRooms.filter(room => room.roomType === roomType)
+    if(filteredRooms.length > 0) {
+      domUpdates.displayFilteredRoomsByType(filteredRooms)
+      return filteredRooms
+    } else {
+      domUpdates.displayApologyMessage()
+      return filteredRooms
+    }
   }
 
   sortBookingsByDate() {
@@ -129,6 +135,10 @@ class Hotel {
     let sortedBookings = this.bookings.bookings.sort((a,b) => new Moment(b.date).format('YYYYMMDD') - new Moment(a.date).format('YYYYMMDD'))
     sortedBookings = this.bookings
     // console.log('sortedBookings', sortedBookings);
+  }
+
+  bookARoom(date) {
+
   }
 
 }
