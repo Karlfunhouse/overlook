@@ -24,6 +24,7 @@ class Guest {
   findMyBookings() {
     let myBookings = this.bookings.filter(booking => booking.userID === this.id)
     domUpdates.displayMyBookings(myBookings);
+    domUpdates.displayFoundGuestInfo(this, myBookings)
     return myBookings
   }
 
