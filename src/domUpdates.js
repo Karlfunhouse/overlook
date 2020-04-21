@@ -6,7 +6,7 @@ var Moment = require('moment');
 let todayDate = Moment().format('YYYY/MM/DD')
 
 let domUpdates = {
-
+//SPLASH PAGE
   displayLoginError() {
     $('.login-error').text('Invalid Username or Password');
     $('.username-js').val('username');
@@ -40,10 +40,6 @@ let domUpdates = {
   },
 
 //MANAGER
-  // displayBookingButton() {
-  //   $('.book-room-button-container').removeClass('hide')
-  // },
-
   displayFoundGuestInfo(guest) {
     $('.user-name').text(`Manager Dashboard`)
     $('.found-guest-bookings').text('');
@@ -80,7 +76,7 @@ let domUpdates = {
     })
   },
 
-//Hotel
+//HOTEL
   displayTodaysBookings(todaySortedBookings) {
     $('.bookings-today').text('')
     todaySortedBookings.forEach(booking => {
@@ -149,7 +145,8 @@ let domUpdates = {
     $('.available-bookings').text('')
     $('.available-bookings').text('We are Super Sorry, but we don\'t have any rooms that match your search criteria.  Please change your search and try again!')
   },
-//Guest
+
+//GUEST
   displayFirstName(firstName) {
     $('.user-name').text(`Welcome Back ${firstName}`)
   },
@@ -188,9 +185,6 @@ let domUpdates = {
         </article>`
       )
     })
-  },
-
-
-}
-
+  }
+};
 export default domUpdates;
