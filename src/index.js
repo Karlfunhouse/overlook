@@ -23,6 +23,7 @@ let manager;
 let guest;
 let currentGuest;
 $('.selected-date').val(calendarDateDisplay)
+$('.selected-date-manager').val(calendarDateDisplay)
 //LOGIN
 function checkLogin() {
   event.preventDefault();
