@@ -188,7 +188,7 @@ $('.book-a-room-button').on('click', (event) => domUpdates.showBookingPage());
 $('.moon-icon-js').on('click', (event) => domUpdates.logOut());
 $('.search-booking').on('click', (event) => instantiateHotel());
 $('.search-booking-manager').on('click', (event) => managerSearchBookings());
-$('.filter-room-type-button').on('click', (event) => hotel.filterRoomsByType($('.roomtype-dropdown').val()))
+$('.roomtype-dropdown').on('change', (event) => hotel.filterRoomsByType($('.roomtype-dropdown').val()))
 $('body').on('click', '.book-room-button', (event) => bookARoom(hotel))
 $('body').on('click', '.cancel-booking-button', (event) => deleteABooking())
 $('.search-guest-button').on('click', (event) => findGuestInfo())
@@ -255,9 +255,9 @@ function displayManagerPage() {
 }
 
 function findGuestInfo() {
-  let guest = manager.findGuestByName($('.search-guest-input').val())
-  console.log('guest id', guest.id);
-  managerGuestFetch(guest.id)
+  currentGuest = manager.findGuestByName($('.search-guest-input').val())
+  console.log('guest id', currentGuest.id);
+  managerGuestFetch(currentGuest.id)
   //instantiateGuest
 }
 
@@ -266,6 +266,7 @@ function displayGuestInfoForManager(guest) {
   guest.findMyBookings();
   guest.calculateTotalSpent();
   domUpdates.displayFoundGuestInfo(guest);
+  console.log('current Guest', currentGuest);
 }
 
 function displayBookingMenu() {
@@ -274,11 +275,12 @@ function displayBookingMenu() {
 }
 
 function bookARoom(hotel) {
-  let date = $('.selected-date').val().split('-').join('/');
+  // let date = $('.selected-date').val().split('-').join('/');
   currentGuest.bookARoom(hotel)
 }
 
 function deleteABooking(hotel) {
-  let date = $('.selected-date-manager').val().split('-').join('/')
+  let guestId = currentGuest.id;
+  // let date = $('.selected-date-manager').val().split('-').join('/')
   manager.deleteBooking(hotel, date)
 }
