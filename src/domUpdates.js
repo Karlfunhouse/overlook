@@ -2,7 +2,8 @@ import $ from 'jquery';
 import Hotel from '../src/Hotel';
 import Guest from '../src/Guest';
 import Manager from '../src/Guest';
-const moment = require('moment')
+var Moment = require('moment');
+let todayDate = Moment().format('YYYY/MM/DD')
 
 let domUpdates = {
 
@@ -38,11 +39,59 @@ let domUpdates = {
     $('.login-form').removeClass('hide')
   },
 
+//MANAGER
+  displayFoundGuestInfo(guest) {
+    $('.found-guest-bookings').text('');
+    $('.found-guest-bookings').removeClass('hide');
+    $('.book-a-room-button').addClass('hide');
+    $('.found-guest-bookings').append(`
+      <div class='guest-name'>${guest.name}</div>
+      <div class='guest-spendings'>Total Spent: $${guest.calculateTotalSpent()}</div>`)
+    guest.bookings.forEach(booking => {
+      if(booking.date >= todayDate) {
+      $('.found-guest-bookings').append(
+        `<article id=${booking.id} class='booking'>
+          <h4>Date: ${booking.date}<h4>
+          <h3>Room #: ${booking.roomNumber}</h3>
+          <h3>Room Type: ${booking.roomType}</h3>
+          <h3>Bed Size: ${booking.bedSize}</h3>
+          <h3># of Beds: ${booking.numBeds}</h3>
+          <h3>$/Night: $${booking.costPerNight}</h3>
+          <h3>Bidet: ${booking.bidet}</h3>
+          <button class="cancel-booking-button">CANCEL RESERVATION</button>
+        </article>`)
+      } else {
+      $('.found-guest-bookings').append(
+        `<article id=${booking.id} class='booking'>
+          <h4>Date: ${booking.date}<h4>
+          <h3>Room #: ${booking.roomNumber}</h3>
+          <h3>Room Type: ${booking.roomType}</h3>
+          <h3>Bed Size: ${booking.bedSize}</h3>
+          <h3># of Beds: ${booking.numBeds}</h3>
+          <h3>$/Night: $${booking.costPerNight}</h3>
+          <h3>Bidet: ${booking.bidet}</h3>
+          <h3>(Past Booking)</h3>
+        </article>`)}
+    })
+  },
+
 //Hotel
   displayTodaysBookings(todaySortedBookings) {
     $('.bookings-today').text('')
     todaySortedBookings.forEach(booking => {
-      $('.bookings-today').append(`
+      if(booking.date >= todayDate) {
+      $('.bookings-today').append(
+        `<article id=${booking.id} class='booking'>
+          <h4>Date: ${booking.date}<h4>
+          <h3>Room #: ${booking.roomNumber}</h3>
+          <h3>Room Type: ${booking.roomType}</h3>
+          <h3>Bed Size: ${booking.bedSize}</h3>
+          <h3># of Beds: ${booking.numBeds}</h3>
+          <h3>$/Night: $${booking.costPerNight}</h3>
+          <h3>Bidet: ${booking.bidet}</h3>
+          <button class="cancel-booking-button">CANCEL RESERVATION</button>
+        </article>`)
+      } else { $('.bookings-today').append(`
         <article id=${booking.id} class='booking'>
         <h2>Room # ${booking.roomNumber}</h2>
         <h3>GuestID: ${booking.userID}</h3>
@@ -52,16 +101,12 @@ let domUpdates = {
         <h3># of Beds: ${booking.numBeds}</h3>
         <h3>Cost/Night $${booking.costPerNight}</h3>
         <h3>Bidet: ${booking.bidet}</h3>
-        <button class="cancel-booking-button">CANCEL RESERVATION</button>
+        <h3>(Past Booking)</h3>
       </article>`)
+      }
     })
   },
 
-  // <h3>Room Type: ${booking.roomInfo.roomType}</h3>
-  // <h3>Bed Size: ${booking.roomInfo.bedSize}</h3>
-  // <h3># of Beds: ${booking.roomInfo.numBeds}</h3>
-  // <h3>$/Night: ${booking.roomInfo.costPerNight}</h3>
-  // <h3>Bidet: ${booking.roomInfo.bidet}</h3>
   displayNumberOfAvailableRooms(allAvailableRooms) {
     $('.available-rooms').text(`Available Rooms: ${allAvailableRooms}`)
   },
