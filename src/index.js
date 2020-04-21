@@ -115,7 +115,6 @@ function guestFetch(guestId) {
     })
 }
 
-
 function managerGuestFetch(guestId) {
   console.log('guestfetch');
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
@@ -215,7 +214,6 @@ function instantiateGuest(guests, rooms, bookings, guestId) {
 
 function instantiateManager(guests, rooms, bookings) {
   let bookingInfo = bookings.bookings.forEach(booking => {
-    // console.log('booking', booking);
     rooms.rooms.forEach(room => {
       if (room.number === booking.roomNumber) {
         booking.roomType = room.roomType,
@@ -238,7 +236,6 @@ function instantiateHotel() {
 function managerSearchBookings() {
   let date = $('.selected-date-manager').val().split('-').join('/')
   hotelFetch(date)
-  // console.log('manager date', date);
 }
 
 function displayGuestPage(guest) {
@@ -256,9 +253,7 @@ function displayManagerPage() {
 
 function findGuestInfo() {
   currentGuest = manager.findGuestByName($('.search-guest-input').val())
-  console.log('guest id', currentGuest.id);
   managerGuestFetch(currentGuest.id)
-  //instantiateGuest
 }
 
 function displayGuestInfoForManager(guest) {
@@ -266,21 +261,18 @@ function displayGuestInfoForManager(guest) {
   guest.findMyBookings();
   guest.calculateTotalSpent();
   domUpdates.displayFoundGuestInfo(guest);
-  console.log('current Guest', currentGuest);
 }
 
 function displayBookingMenu() {
-  console.log('book button clicked');
   domUpdates.showBookingPage()
 }
 
 function bookARoom(hotel) {
-  // let date = $('.selected-date').val().split('-').join('/');
-  currentGuest.bookARoom(hotel)
+  let date = $('.selected-date').val().split('-').join('/');
+  currentGuest.bookARoom(hotel, date)
 }
 
 function deleteABooking(hotel) {
   let guestId = currentGuest.id;
-  // let date = $('.selected-date-manager').val().split('-').join('/')
-  manager.deleteBooking(hotel, date)
+  manager.deleteBooking(hotel)
 }
