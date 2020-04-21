@@ -39,7 +39,7 @@ class Guest {
   }
 
   bookARoom(hotel) {
-    // let date = $('.selected-date').val().split('-').join('/');
+    let date = $('.selected-date').val().split('-').join('/');
     console.log('book room button clicked');
       let bookingId = event.target.parentNode.id
     fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
