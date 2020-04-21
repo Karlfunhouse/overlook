@@ -64,13 +64,12 @@ function managerFetch() {
       return guests
     })
     .then(() => {
-      hotel = new Hotel(rooms, bookings, todayDate);
+      hotel = new Hotel(guests, rooms, bookings, todayDate);
       console.log('todayDate', todayDate);
       hotel.setUpHotel();
-  })
+    })
     .then(() => {
-      instantiateManager(rooms, bookings)
-      // console.log(manager);
+      instantiateManager(guests, rooms, bookings)
       displayManagerPage();
   })
     .catch(error => {
@@ -102,7 +101,7 @@ function guestFetch(guestId) {
       return guests
     })
     .then(() => {
-      hotel = new Hotel(rooms, bookings, todayDate);
+      hotel = new Hotel(guests, rooms, bookings, todayDate);
       hotel.setUpHotel();
       // console.log('hotel', hotel);
     })
@@ -110,6 +109,44 @@ function guestFetch(guestId) {
       let guest = instantiateGuest(guests, rooms, bookings, guestId)
       // console.log('100', guest)
       displayGuestPage(guest)
+    })
+    .catch(error => {
+      console.log('Something is amiss with promise all', error)
+    })
+}
+
+
+function managerGuestFetch(guestId) {
+  console.log('guestfetch');
+  usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+    .then(data => data.json())
+    .catch(error => console.log('userData error'))
+
+  roomsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms')
+    .then(data => data.json())
+    .catch(error => console.log('roomsData error'))
+
+  bookingsData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
+    .then(data => data.json())
+    .catch(error => console.log('bookingsData error'))
+
+  Promise.all([usersData, roomsData, bookingsData])
+    .then(data => {
+      console.log('data',data);
+      guests = data[0];
+      console.log(guests);
+      rooms = data[1];
+      bookings = data[2];
+      return guests
+    })
+    .then(() => {
+      hotel = new Hotel(guests, rooms, bookings, todayDate);
+      hotel.setUpHotel();
+      // console.log('hotel', hotel);
+    })
+    .then(() => {
+      let guest = instantiateGuest(guests, rooms, bookings, guestId)
+      displayGuestInfoForManager(guest)
     })
     .catch(error => {
       console.log('Something is amiss with promise all', error)
@@ -136,7 +173,7 @@ export function hotelFetch(date) {
       bookings = data[2];
     })
     .then(() => {
-      hotel = new Hotel(rooms, bookings, date);
+      hotel = new Hotel(guests, rooms, bookings, date);
       hotel.setUpHotel();
       console.log('hotel', hotel);
     })
@@ -154,6 +191,7 @@ $('.search-booking-manager').on('click', (event) => managerSearchBookings());
 $('.filter-room-type-button').on('click', (event) => hotel.filterRoomsByType($('.roomtype-dropdown').val()))
 $('body').on('click', '.book-room-button', (event) => bookARoom(hotel))
 $('body').on('click', '.cancel-booking-button', (event) => deleteABooking())
+$('.search-guest-button').on('click', (event) => findGuestInfo())
 
 
 function instantiateGuest(guests, rooms, bookings, guestId) {
@@ -175,7 +213,7 @@ function instantiateGuest(guests, rooms, bookings, guestId) {
   return currentGuest
 }
 
-function instantiateManager(rooms, bookings) {
+function instantiateManager(guests, rooms, bookings) {
   let bookingInfo = bookings.bookings.forEach(booking => {
     // console.log('booking', booking);
     rooms.rooms.forEach(room => {
@@ -188,7 +226,7 @@ function instantiateManager(rooms, bookings) {
       }
     })
   })
-  manager = new Manager(0, 'Boss', rooms, bookings)
+  manager = new Manager(guests, 0, 'Boss', rooms, bookings)
   return manager
 }
 
@@ -214,6 +252,20 @@ function displayGuestPage(guest) {
 function displayManagerPage() {
   domUpdates.hideLoginMenu();
   domUpdates.showManagerPage();
+}
+
+function findGuestInfo() {
+  let guest = manager.findGuestByName($('.search-guest-input').val())
+  console.log('guest id', guest.id);
+  managerGuestFetch(guest.id)
+  //instantiateGuest
+}
+
+function displayGuestInfoForManager(guest) {
+  guest.findFirstName();
+  guest.findMyBookings();
+  guest.calculateTotalSpent();
+  domUpdates.displayFoundGuestInfo(guest);
 }
 
 function displayBookingMenu() {
