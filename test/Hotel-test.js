@@ -15,7 +15,8 @@ beforeEach(() => {
   // chai.spy.on(domUpdates, "displayTodaysRevenue", () => {});
   // chai.spy.on(domUpdates, "displayPercentageOfOccupiedRooms", () => {});
 
-  bookings = [
+  bookings = {
+    bookings = [
     {
     "id": "5fwrgu4i7k55hl6sz",
     "userID": 9,
@@ -58,7 +59,8 @@ beforeEach(() => {
     "roomNumber": 4,
     "roomServiceCharges": []
     }
-  ];
+  ]
+}
 
   rooms = [
     {

@@ -1,4 +1,5 @@
 import domUpdates from './domUpdates'
+import Hotel from './Hotel'
 
 class Guest {
   constructor(id, name, bookings) {
@@ -25,15 +26,30 @@ class Guest {
   calculateTotalSpent() {
     let totalMoneySpent = this.bookings.filter(booking => booking.userID === this.id)
     .reduce((totalSpent, booking) => {
-      totalSpent += booking.roomInfo.costPerNight
+      totalSpent += booking.costPerNight
       return totalSpent
     }, 0)
     domUpdates.displayTotalSpent(totalMoneySpent.toFixed(2))
     return +totalMoneySpent.toFixed(2)
   }
 
-  bookARoom() {
-
+  bookARoom(hotel) {
+    console.log('book room button clicked');
+      let bookingId = event.target.parentNode.id
+    fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "userID": this.id,
+        "date": hotel.date,
+        "roomNumber": +bookingId,
+      }),
+    })
+    .then((response) => response.json())
+    .then((data) => console.log('Success:', data))
+    .catch((error) => console.error('Error:', error))
   }
 
 };
