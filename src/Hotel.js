@@ -22,6 +22,12 @@ class Hotel {
     this.findPercentageOfOccupiedRooms();
   }
 
+  populateGuestList() {
+    let guestNames = this.guests.users.map(guest => guest.name)
+    console.log('guestnames', guestNames);
+    // domUpdates.createGuestList(guestNames)
+  }
+
   findTodaysBookings() {
     this.addRoomInfoToBookings()
     let todaysBookings = this.bookings.bookings.filter(booking => booking.date === this.date)
@@ -45,7 +51,6 @@ class Hotel {
     return bookingInfo
   }
 
-//need to only find which rooms aren't booked for today's date.
   findTotalAvailableRooms() {
     let todaysBookings = this.bookings.bookings.filter(booking => booking.date === this.date)
     let todaySortedBookings = todaysBookings.sort((a, b) => a.roomNumber - b.roomNumber)
