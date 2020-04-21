@@ -14,12 +14,12 @@ let domUpdates = {
   },
 
   hideLoginMenu() {
-    $('.login-form').addClass('hide')
+    $('.login-form').addClass('hide');
   },
 
   showManagerPage() {
     $('.manager-dashboard').removeClass('hide');
-    $('.user-name').text('Welcome Boss')
+    $('.user-name').text('Manager Dashboard');
   },
 
   showGuestPage() {
@@ -36,14 +36,19 @@ let domUpdates = {
     $('.user-dashboard').addClass('hide');
     $('.manager-dashboard').addClass('hide');
     $('.booking-display').addClass('hide');
-    $('.login-form').removeClass('hide')
+    $('.login-form').removeClass('hide');
   },
 
 //MANAGER
+  // displayBookingButton() {
+  //   $('.book-room-button-container').removeClass('hide')
+  // },
+
   displayFoundGuestInfo(guest) {
+    $('.user-name').text(`Manager Dashboard`)
     $('.found-guest-bookings').text('');
+    $('.book-room-button-container').removeClass('hide')
     $('.found-guest-bookings').removeClass('hide');
-    $('.book-a-room-button').addClass('hide');
     $('.found-guest-bookings').append(`
       <div class='guest-name'>${guest.name}</div>
       <div class='guest-spendings'>Total Spent: $${guest.calculateTotalSpent()}</div>`)
