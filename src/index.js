@@ -18,10 +18,11 @@ let bookings;
 let hotel;
 let date;
 let todayDate = Moment().format('YYYY/MM/DD')
+let calendarDateDisplay = Moment().format('YYYY/MM/DD').split('/').join('-')
 let manager;
 let guest;
 let currentGuest;
-console.log('todayDate', todayDate);
+$('.selected-date').val(calendarDateDisplay)
 //LOGIN
 function checkLogin() {
   event.preventDefault();
@@ -114,7 +115,7 @@ function guestFetch(guestId) {
     })
 }
 
-function hotelFetch(date) {
+export function hotelFetch(date) {
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .catch(error => console.log('userData error'))
@@ -222,11 +223,9 @@ function displayBookingMenu() {
 function bookARoom(hotel) {
   let date = $('.selected-date').val().split('-').join('/');
   currentGuest.bookARoom(hotel)
-  hotelFetch(date)
 }
 
 function deleteABooking(hotel) {
   let date = $('.selected-date-manager').val().split('-').join('/')
   manager.deleteBooking(hotel, date)
-  hotelFetch(date)
 }

@@ -1,5 +1,9 @@
 import domUpdates from './domUpdates'
 import Hotel from './Hotel'
+import {hotelFetch} from './index'
+import $ from 'jquery';
+
+
 
 class Guest {
   constructor(id, name, bookings) {
@@ -34,6 +38,7 @@ class Guest {
   }
 
   bookARoom(hotel) {
+    // let date = $('.selected-date').val().split('-').join('/');
     console.log('book room button clicked');
       let bookingId = event.target.parentNode.id
     fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
@@ -48,6 +53,7 @@ class Guest {
       }),
     })
     .then((response) => response.json())
+    .then(() => {hotelFetch(hotel)})
     .then((data) => console.log('Success:', data))
     .catch((error) => console.error('Error:', error))
   }

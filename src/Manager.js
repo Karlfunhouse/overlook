@@ -1,6 +1,8 @@
 import Guest from '../src/Guest';
 import domUpdates from './domUpdates'
+import {hotelFetch} from './index'
 const moment = require('moment')
+import $ from 'jquery';
 
 
 class Manager extends Guest {
@@ -14,6 +16,7 @@ class Manager extends Guest {
   }
 
   deleteBooking(hotel) {
+    let date = $('.selected-date-manager').val().split('-').join('/')
     console.log('delete button clicked');
       let bookingId = event.target.parentNode.id
       console.log('bookingid', bookingId);
@@ -27,7 +30,7 @@ class Manager extends Guest {
         })
       })
       .then(response => console.log(response))
-      // .then(() => {hotelFetch(date)})
+      .then(() => {hotelFetch(date)})
       .catch(err => console.log(err));
 
     }
