@@ -17,9 +17,11 @@
       <!-- LOGIN -->
       <form class="login-form">
         <h2>Welcome</h2>
-        <input type="text" class="username-js" name="Username" placeholder="Username" autocomplete="false">
-        <input type="text" class="password-js" name="Password" placeholder="Password">
-        <input type="submit" class="login-submit-js" value="Submit">
+        <label for=“username-js”>Enter Your Username</label>
+        <input type="text" class="username-js" id="username-js" title="username-js" placeholder="Username" autocomplete="false">
+        <label for=“Password”>Enter Your Password</label>
+        <input type="text" class="password-js" id="password-js" title="Password" placeholder="Password"/>
+        <input type="submit" class="login-submit-js" value="Submit"/>
         <p class='login-error'></p>
       </form>
       <!-- GUEST -->
@@ -39,7 +41,7 @@
           <h2 class="user-name"></h2>
           <div class="date-menu">
             <h3>Search Bookings By Date</h3>
-            <input type="date" class="selected-date-manager">
+            <input type="date" class="selected-date-manager" title="manager select date">
             <button class="search-booking-manager">Search</button>
           </div>
           <div class="daily-hotel-stats">
@@ -53,7 +55,7 @@
         </div>
         <div class="manager-tools">
           <div class="search-guest-menu">
-            <input type="text" class="search-guest-input">
+            <input type="text" class="search-guest-input" title="search guest input">
             <button class="search-guest-button" type="button">Find Guest</button>
             <div class="book-room-button-container hide">
               <button class="book-a-room-button hide">Book A Room</button>
@@ -72,11 +74,12 @@
           <h2 class="booking-title">Book Your Next Stay</h2>
             <section class="booking-filters">
               <div class="date-menu">
-                <input type="date" class="selected-date">
+                <label for="selected-date">Please Select A Date</label>
+                <input type="date" class="selected-date" title="select date input">
                 <button class="search-booking">Search</button>
               </div>
-              <form class="roomtype-menu">
-                <select name="room-type" class="roomtype-dropdown">
+              <form class="roomtype-menu" title="room type dropdown menu">
+                <select name="room-type" class="roomtype-dropdown" title="room dropdown options">
                   <option value="all rooms">All Rooms</option>
                   <option value="residential suite">Residential Suite</option>
                   <option value="suite">Suite</option>
