@@ -3,13 +3,11 @@
   <head>
     <title>Casa de la Luna</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="datepicker.min.css"> -->
   </head>
   <body>
     <header>
       <nav>
         <button><img src="./images/moon-icon.svg" class="moon-icon-js" alt="moon logo icon" height="120px" width="120px"></button>
-
         <h1>Casa <span class="hotel-title-words">de la</span> Luna</h1>
       </nav>
     </header>
@@ -58,17 +56,13 @@
             <input type="text" class="search-guest-input" title="search guest input">
             <button class="search-guest-button" type="button">Find Guest</button>
             <div class="book-room-button-container hide">
-              <button class="book-a-room-button hide">Book A Room</button>
+              <button class="book-a-room-button">Book A Room</button>
             </div>
             <section class="found-guest-bookings hide">Guest Info</section>
           </div>
           <div class="bookings-today">Today's Bookings</div>
         </div>
-        <!-- <div class="book-room-button-container">
-          <button class="book-a-room-button">Book A Room</button>
-        </div> -->
       </section>
-
       <section class="booking-display hide">
         <article class="book-room-menu">
           <h2 class="booking-title">Book Your Next Stay</h2>
@@ -78,6 +72,7 @@
                 <input type="date" class="selected-date" title="select date input">
                 <button class="search-booking">Search</button>
               </div>
+              <label for="roomtype-menu">Filter By Room Type</label>
               <form class="roomtype-menu" title="room type dropdown menu">
                 <select name="room-type" class="roomtype-dropdown" title="room dropdown options">
                   <option value="all rooms">All Rooms</option>
@@ -94,9 +89,7 @@
               </div>
             </section>
           </article>
-
       </section>
     </main>
-
   </body>
 </html>
