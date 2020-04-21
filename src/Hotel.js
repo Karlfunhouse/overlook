@@ -121,6 +121,12 @@ class Hotel {
   filterRoomsByType(roomType) {
     let availableRooms = this.findAvailableRooms()
     let filteredRooms = availableRooms.filter(room => room.roomType === roomType)
+
+    if(roomType === 'all rooms') {
+      domUpdates.displayFilteredRoomsByType(availableRooms)
+      return availableRooms
+    }
+
     if(filteredRooms.length > 0) {
       domUpdates.displayFilteredRoomsByType(filteredRooms)
       return filteredRooms
