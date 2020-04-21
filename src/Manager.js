@@ -6,8 +6,9 @@ import $ from 'jquery';
 
 
 class Manager extends Guest {
-  constructor(id, name, rooms, bookings) {
+  constructor(guests, id, name, rooms, bookings) {
     super(id, name, rooms, bookings);
+    this.guests = guests;
     this.id = id;
     this.name = name;
     this.bookings = bookings;
@@ -36,8 +37,10 @@ class Manager extends Guest {
     }
 
   findGuestByName(name) {
-
-
+    let guestName =  name.charAt(0).toUpperCase() + name.slice(1)
+    let foundGuest = this.guests.users.find(guest => guest.name.includes(guestName))
+    console.log('found guest', foundGuest);
+    return foundGuest
   }
 
 
