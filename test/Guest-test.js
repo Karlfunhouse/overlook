@@ -1,19 +1,28 @@
-import $ from 'jquery';
-const chai = require('chai');
+
+// import $ from 'jquery';
+import chai from 'chai';
 const expect = chai.expect;
 const spies = require("chai-spies");
 chai.use(spies);
 import Guest from '../src/Guest';
-import domUpdates from '../src/DomUpdates'
+import domUpdates from '../src/domUpdates'
+// var jsdom = require('mocha-jsdom')
 
 let bookings;
 let rooms;
 let guest;
 
+describe('Guest', () => {
+
+afterEach(() => {
+  chai.spy.restore(domUpdates);
+})
+
 beforeEach(() => {
-  // chai.spy.on(domUpdates, "displayFirstName", () => {});
-  // chai.spy.on(domUpdates, "displayMyBookings", () => {});
-  // chai.spy.on(domUpdates, "displayTotalSpent", () => {});
+  chai.spy.on(domUpdates, "displayFirstName", () => {});
+  chai.spy.on(domUpdates, "displayMyBookings", () => {});
+  chai.spy.on(domUpdates, "displayFoundGuestInfo", () => {});
+  chai.spy.on(domUpdates, "displayTotalSpent", () => {});
 
   bookings = [
     {
@@ -106,7 +115,7 @@ beforeEach(() => {
         "costPerNight": 429.44
       }
     }
-  ];
+  ],
 
   rooms = [
     {
@@ -181,16 +190,13 @@ beforeEach(() => {
       "numBeds": 1,
       "costPerNight": 397.02
     },
-  ]
+  ],
 
   guest = new Guest(1, 'Leatha Ullrich', bookings)
 })
 
-// afterEach(() => {
-//   chai.spy.restore(domUpdates);
-// })
 
-describe('Guest', () => {
+
   it('should be a function', () => {
     expect(Guest).to.be.a('function')
   })
@@ -201,6 +207,9 @@ describe('Guest', () => {
 
   it('should be able to get guest first name', () => {
     expect(guest.findFirstName()).to.equal('Leatha')
+    expect(domUpdates.displayFirstName(firstName[0])).to.have.been.called.with('Leatha')
+    expect(domUpdates.displayFirstName(firstName[0])).to.have.been.called(1)
+
   })
 
   it('should find a users bookings', () => {

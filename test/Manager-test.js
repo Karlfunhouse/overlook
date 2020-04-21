@@ -4,16 +4,13 @@ const expect = chai.expect;
 const spies = require("chai-spies");
 chai.use(spies);
 import Guest from '../src/Guest';
-import domUpdates from '../src/DomUpdates'
+import domUpdates from '../src/domUpdates'
 
 let bookings;
 let rooms;
 let users
 
 beforeEach(() => {
-  // chai.spy.on(domUpdates, "displayFirstName", () => {});
-  // chai.spy.on(domUpdates, "displayMyBookings", () => {});
-  // chai.spy.on(domUpdates, "displayTotalSpent", () => {});
 
   users: [
     {

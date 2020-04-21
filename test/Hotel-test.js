@@ -3,7 +3,7 @@ const expect = chai.expect;
 // const spies = require("chai-spies");
 // chai.use(spies);
 import Hotel from '../src/Hotel';
-import domUpdates from '../src/DomUpdates'
+import domUpdates from '../src/domUpdates'
 
 let bookings;
 let rooms;
@@ -15,8 +15,8 @@ beforeEach(() => {
   // chai.spy.on(domUpdates, "displayTodaysRevenue", () => {});
   // chai.spy.on(domUpdates, "displayPercentageOfOccupiedRooms", () => {});
 
-  bookings = {
-    bookings = [
+
+    bookings.bookings = [
     {
     "id": "5fwrgu4i7k55hl6sz",
     "userID": 9,
@@ -60,9 +60,9 @@ beforeEach(() => {
     "roomServiceCharges": []
     }
   ]
-}
 
-  rooms = [
+
+  rooms.rooms = [
     {
     "number": 1,
     "roomType": "residential suite",
@@ -148,9 +148,9 @@ beforeEach(() => {
   hotel = new Hotel(rooms, bookings, '2020/02/04')
 })
 
-// afterEach(() => {
-//   chai.spy.restore(domUpdates);
-// })
+afterEach(() => {
+  chai.spy.restore(domUpdates);
+})
 
 describe('Hotel', () => {
   it('should be a function', () => {
@@ -173,7 +173,7 @@ describe('Hotel', () => {
     expect(hotel.findTotalRevenueForToday()).to.equal(397.02)
   })
 
-  it.only('should be able to calculate percentage of occupied rooms', () => {
+  it('should be able to calculate percentage of occupied rooms', () => {
     expect(hotel.findPercentageOfOccupiedRooms()).to.equal(10)
   })
 })
