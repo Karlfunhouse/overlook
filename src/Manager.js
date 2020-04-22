@@ -1,4 +1,4 @@
-// import {hotelFetch} from './index'
+import {hotelFetch} from './index'
 
 class Manager {
   constructor(guests, id, name, rooms, bookings) {

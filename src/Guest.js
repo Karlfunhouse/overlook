@@ -1,6 +1,6 @@
 import domUpdates from '../src/domUpdates'
 import Hotel from './Hotel'
-// import {hotelFetch} from './index'
+import {hotelFetch} from './index'
 var Moment = require('moment');
 
 class Guest {
