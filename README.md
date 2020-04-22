@@ -36,10 +36,10 @@ To start the server run
 npm start
 ```
 navigate to http://localhost:8080/ in your browser.
-**Guest Login
+**Guest Login**
 * Username: customer[1-50]
 * Password: overlook2020
-**Manager Login
+**Manager Login**
 * Username: manager
 * Password: overlook2020
 
