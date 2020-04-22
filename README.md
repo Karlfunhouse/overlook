@@ -37,11 +37,11 @@ npm start
 ```
 navigate to http://localhost:8080/ in your browser.
 **Guest Login**
-* Username: customer[1-50]
-* Password: overlook2020
+Username: customer[1-50]
+Password: overlook2020
 **Manager Login**
-* Username: manager
-* Password: overlook2020
+Username: manager
+Password: overlook2020
 
 ### Technologies Used
 - Fetch API to get users, rooms & bookings from respective endpoints.
