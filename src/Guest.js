@@ -1,7 +1,7 @@
 import domUpdates from './domUpdates'
 import Hotel from './Hotel'
 import {hotelFetch} from './index'
-// import $ from 'jquery';
+import $ from 'jquery';
 var Moment = require('moment');
 
 
