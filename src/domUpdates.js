@@ -39,9 +39,14 @@ let domUpdates = {
     $('.login-form').removeClass('hide');
   },
 
+  hideBookingPage() {
+    $('.booking-display').addClass('hide');
+    $('.user-dashboard').removeClass('hide');
+  },
+
 //MANAGER
   displayFoundGuestInfo(guest) {
-    $('.user-name').text(`Manager Dashboard`)
+    $('.user-name').text(`${guest.name}`)
     $('.found-guest-bookings').text('');
     $('.book-room-button-container').removeClass('hide')
     $('.found-guest-bookings').removeClass('hide');
