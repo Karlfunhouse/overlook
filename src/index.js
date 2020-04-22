@@ -237,7 +237,6 @@ function matchRoomsToBookings(bookings, rooms) {
   return newBookings
 }
 
-
 function setUpHotel(hotel) {
   hotel.sortBookingsByDate();
   hotel.findTodaysBookings();
@@ -248,38 +247,14 @@ function setUpHotel(hotel) {
   hotel.findPercentageOfOccupiedRooms();
 }
 
-
-
 function instantiateGuest(guests, rooms, bookings, guestId) {
   let guest = guests.find(guest => guest.id === +guestId)
   let guestBookings = bookings.filter(booking => booking.userID === +guestId)
-  // let bookingInfo = guestBookings.forEach(booking => {
-  //   rooms.rooms.forEach(room => {
-  //     if (room.number === booking.roomNumber) {
-  //       booking.roomType = room.roomType,
-  //       booking.bidet = room.bidet,
-  //       booking.bedSize = room.bedSize,
-  //       booking.numBeds = room.numBeds,
-  //       booking.costPerNight = room.costPerNight
-  //     }
-  //   })
-  // })
   currentGuest = new Guest(guest.id, guest.name, guestBookings)
   return currentGuest
 }
 
 function instantiateManager(guests, rooms, bookings) {
-  // let bookingInfo = bookings.bookings.forEach(booking => {
-  //   rooms.rooms.forEach(room => {
-  //     if (room.number === booking.roomNumber) {
-  //       booking.roomType = room.roomType,
-  //       booking.bidet = room.bidet,
-  //       booking.bedSize = room.bedSize,
-  //       booking.numBeds = room.numBeds,
-  //       booking.costPerNight = room.costPerNight
-  //     }
-  //   })
-  // })
   manager = new Manager(guests, 0, 'Boss', rooms, bookings)
   return manager
 }
