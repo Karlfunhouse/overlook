@@ -1,10 +1,6 @@
-import $ from 'jquery';
 const chai = require('chai');
 const expect = chai.expect;
-const spies = require("chai-spies");
-chai.use(spies);
 import Guest from '../src/Guest';
-import domUpdates from '../src/domUpdates'
 
 let bookings;
 let rooms;
@@ -241,7 +237,7 @@ beforeEach(() => {
       expect(manager.deleteBooking(hotel))
     })
 
-    it.only('should be able to find a guest by name', () => {
+    it('should be able to find a guest by name', () => {
       expect(manager.findGuestByName('Leatha')).to.equal('Leatha')
     });
   });
