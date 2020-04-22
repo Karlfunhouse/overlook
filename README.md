@@ -38,6 +38,7 @@ npm start
 - OOP to keep each class encapsulated and only taking care of their own functionality.
 - Webpack as a compiler for SCSS.
 - jQuery for all DOM updates & event handlers.
+- Chai Spies.
 
 ## Wins
 * Creating a functioning app that utilizes many new technologies which are listed above.
@@ -47,7 +48,7 @@ npm start
 ## Challenges
 * Using fetch was a tricky part of this project, especially when booking a room or deleting a booking.  Being able to update the DOM with the data as soon as it changed was particularly challenging.
 * Making use of a domUpdates class which hosted all DOM updates methods.  Each class method calls the corresponding domUpdate method which ended up being a bit of a confusing web to navigate.
-* Utilizing the domUpdates class also made it challenging to work on testing later in the project.  Though all classes were set up and tested at the start of the project, incorporating the domUpdates method (and this jQuery) gave a persistent error that the window was not defined and thus the test suite could not run.  I spent over 5 hours on the last day trying to debug this and was unable to figure it out.  
+* Importing the hotelFetch function from the index.html into the Guest.js & Manager.js classes broke my testing suite giving me an error saying the Window was not defined.  12 hours of debugging later I was able to figure it out.
 
 ## Future Iterations
 * Implementing media queries to be responsive across multiple devices
