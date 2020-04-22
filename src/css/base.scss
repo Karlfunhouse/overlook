@@ -84,9 +84,6 @@ form {
     }
 }
 
-
-
-
 form input[type="submit"] {
     border: 2px solid $sky-blue;
     box-sizing: border-box;
@@ -114,7 +111,6 @@ form input[type="submit"]:focus {
 .user-dashboard,
 .manager-dashboard,
 .booking-display {
-  // border: 3px solid $moon-white;
   width: 1000px;
   height: 500px;
   margin: 2%;
@@ -166,7 +162,6 @@ form input[type="submit"]:focus {
 .search-guest-menu {
   background-color: $sky-blue;
   display: flex;
-  // justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -188,7 +183,6 @@ form input[type="submit"]:focus {
   width: 40%;
   height: 30px;
   margin-top: 3%;
-
 }
 
 .my-bookings,
@@ -206,13 +200,10 @@ form input[type="submit"]:focus {
     }
 }
 
-
-
 .booking-title {
   color: $moon-white;
   padding: 2%;
   text-align: center;
-
 }
 
 .booking {
@@ -286,7 +277,6 @@ form input[type="submit"]:focus {
   border: 1px solid $moon-white;
   border-radius: 5px;
   font-size: 1em;
-
 }
 
 .rooms-available {
