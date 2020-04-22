@@ -57,15 +57,19 @@ function managerFetch() {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      guests = data[0];
-      rooms = data[1];
-      bookings = data[2];
+      guests = data[0].users;
+      rooms = data[1].rooms;
+      bookings = data[2].bookings;
       return guests
     })
     .then(() => {
-      hotel = new Hotel(guests, rooms, bookings, todayDate);
+      hotel = new Hotel(rooms, bookings, todayDate);
       console.log('todayDate', todayDate);
-      hotel.setUpHotel();
+      console.log('rooms', rooms);
+      createRoomObjects(rooms)
+      createBookingObjects(bookings, rooms)
+      console.log('hotel', hotel);
+      setUpHotel(hotel);
     })
     .then(() => {
       instantiateManager(guests, rooms, bookings)
@@ -91,14 +95,16 @@ function guestFetch(guestId) {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      guests = data[0];
-      rooms = data[1];
-      bookings = data[2];
+      guests = data[0].users;
+      rooms = data[1].rooms;
+      bookings = data[2].bookings;
       return guests
     })
     .then(() => {
-      hotel = new Hotel(guests, rooms, bookings, todayDate);
-      hotel.setUpHotel();
+      hotel = new Hotel(rooms, bookings, todayDate);
+      createRoomObjects(rooms)
+      createBookingObjects(bookings, rooms)
+      setUpHotel(hotel);
     })
     .then(() => {
       let guest = instantiateGuest(guests, rooms, bookings, guestId)
@@ -124,14 +130,16 @@ function managerGuestFetch(guestId) {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      guests = data[0];
-      rooms = data[1];
-      bookings = data[2];
+      guests = data[0].users;
+      rooms = data[1].rooms;
+      bookings = data[2].bookings;
       return guests
     })
     .then(() => {
-      hotel = new Hotel(guests, rooms, bookings, todayDate);
-      hotel.setUpHotel();
+      hotel = new Hotel(rooms, bookings, todayDate);
+      createRoomObjects(rooms)
+      createBookingObjects(bookings, rooms)
+      setUpHotel(hotel);
     })
     .then(() => {
       let guest = instantiateGuest(guests, rooms, bookings, guestId)
@@ -157,13 +165,15 @@ export function hotelFetch(date) {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      guests = data[0];
-      rooms = data[1];
-      bookings = data[2];
+      guests = data[0].users;
+      rooms = data[1].rooms;
+      bookings = data[2].bookings;
     })
     .then(() => {
-      hotel = new Hotel(guests, rooms, bookings, date);
-      hotel.setUpHotel();
+      hotel = new Hotel(rooms, bookings, date);
+      createRoomObjects(rooms)
+      createBookingObjects(bookings, rooms)
+      setUpHotel(hotel);
     })
     .catch(error => {
       console.log('Something is amiss with promise all', error)
@@ -182,37 +192,94 @@ $('body').on('click', '.cancel-booking-button', (event) => deleteABooking())
 $('.search-guest-button').on('click', (event) => findGuestInfo())
 $('.return-to-bookings-button').on('click', (event) => domUpdates.hideBookingPage())
 
+function createRoomObjects(rooms) {
+  rooms.forEach(room => {
+    let roomObject = {
+      'number': room.number,
+      'roomType': room.roomType,
+      'bidet': room.bidet,
+      'bedSize': room.bedSize,
+      'numBeds': room.numBeds,
+      'costPerNight': room.costPerNight,
+      'image': room.image
+    }
+    hotel.allRooms.push(roomObject)
+  })
+}
 
-function instantiateGuest(guests, rooms, bookings, guestId) {
-  let guest = guests.users.find(guest => guest.id === +guestId)
-  let guestBookings = bookings.bookings.filter(booking => booking.userID === +guestId)
-  let bookingInfo = guestBookings.forEach(booking => {
-    rooms.rooms.forEach(room => {
+function createBookingObjects(bookings, rooms) {
+  console.log('bookings object ');
+  hotel.allBookings = matchRoomsToBookings(bookings, rooms);
+}
+
+function matchRoomsToBookings(bookings, rooms) {
+  let newBookings = []
+  bookings.map(booking => {
+    rooms.forEach(room => {
       if (room.number === booking.roomNumber) {
-        booking.roomType = room.roomType,
-        booking.bidet = room.bidet,
-        booking.bedSize = room.bedSize,
-        booking.numBeds = room.numBeds,
-        booking.costPerNight = room.costPerNight
+        let bookingObject = {
+          'id': booking.id,
+          'userID': booking.userID,
+          'date': booking.date,
+          'roomNumber': room.number,
+          'roomType': room.roomType,
+          'bidet': room.bidet,
+          'bedSize': room.bedSize,
+          'numBeds': room.numBeds,
+          'costPerNight': room.costPerNight,
+          'roomServiceCharges': booking.roomServiceCharges,
+        }
+        newBookings.push(bookingObject)
       }
     })
   })
+  console.log('newBookings', newBookings);
+  return newBookings
+}
+
+
+function setUpHotel(hotel) {
+  hotel.sortBookingsByDate();
+  hotel.findTodaysBookings();
+  hotel.findTotalAvailableRooms();
+  hotel.findAvailableRooms();
+  hotel.findAvailableRoomNumbers();
+  hotel.findTotalRevenueForToday();
+  hotel.findPercentageOfOccupiedRooms();
+}
+
+
+
+function instantiateGuest(guests, rooms, bookings, guestId) {
+  let guest = guests.find(guest => guest.id === +guestId)
+  let guestBookings = bookings.filter(booking => booking.userID === +guestId)
+  // let bookingInfo = guestBookings.forEach(booking => {
+  //   rooms.rooms.forEach(room => {
+  //     if (room.number === booking.roomNumber) {
+  //       booking.roomType = room.roomType,
+  //       booking.bidet = room.bidet,
+  //       booking.bedSize = room.bedSize,
+  //       booking.numBeds = room.numBeds,
+  //       booking.costPerNight = room.costPerNight
+  //     }
+  //   })
+  // })
   currentGuest = new Guest(guest.id, guest.name, guestBookings)
   return currentGuest
 }
 
 function instantiateManager(guests, rooms, bookings) {
-  let bookingInfo = bookings.bookings.forEach(booking => {
-    rooms.rooms.forEach(room => {
-      if (room.number === booking.roomNumber) {
-        booking.roomType = room.roomType,
-        booking.bidet = room.bidet,
-        booking.bedSize = room.bedSize,
-        booking.numBeds = room.numBeds,
-        booking.costPerNight = room.costPerNight
-      }
-    })
-  })
+  // let bookingInfo = bookings.bookings.forEach(booking => {
+  //   rooms.rooms.forEach(room => {
+  //     if (room.number === booking.roomNumber) {
+  //       booking.roomType = room.roomType,
+  //       booking.bidet = room.bidet,
+  //       booking.bedSize = room.bedSize,
+  //       booking.numBeds = room.numBeds,
+  //       booking.costPerNight = room.costPerNight
+  //     }
+  //   })
+  // })
   manager = new Manager(guests, 0, 'Boss', rooms, bookings)
   return manager
 }

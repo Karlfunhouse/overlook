@@ -1,10 +1,7 @@
-import domUpdates from './domUpdates'
+import domUpdates from '../src/domUpdates'
 import Hotel from './Hotel'
-import {hotelFetch} from './index'
-import $ from 'jquery';
+// import {hotelFetch} from './index'
 var Moment = require('moment');
-
-
 
 class Guest {
   constructor(id, name, bookings) {
@@ -13,7 +10,7 @@ class Guest {
     this.bookings = bookings;
     this.firstName = this.findFirstName();
     this.myBookings = this.findMyBookings;
-  };
+  }
 
   findFirstName() {
     let firstName = this.name.split(' ');
@@ -34,7 +31,7 @@ class Guest {
       totalSpent += booking.costPerNight
       return totalSpent
     }, 0)
-    domUpdates.displayTotalSpent(totalMoneySpent.toFixed(2))
+    domUpdates.displayTotalSpent(+totalMoneySpent.toFixed(2))
     return +totalMoneySpent.toFixed(2)
   };
 
@@ -62,7 +59,8 @@ class Guest {
     .then((data) => console.log('Success:', data))
     .catch((error) => console.error('Error:', error))
   };
+}
 
-};
 
-export default Guest;
+
+  export default Guest;

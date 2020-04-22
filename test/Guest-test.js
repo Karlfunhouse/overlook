@@ -1,16 +1,26 @@
-
+import $ from 'jquery';
 import chai from 'chai';
 const expect = chai.expect;
+const spies = require("chai-spies");
+chai.use(spies);
 import Guest from '../src/Guest';
+import domUpdates from '../src/domUpdates'
 
 let bookings;
 let rooms;
 let guest;
 
-describe('Guest', () => {
+describe('Guest', function() {
 
+  afterEach(() => {
+  chai.spy.restore(domUpdates);
+})
 
-beforeEach(() => {
+  beforeEach(() => {
+  chai.spy.on(domUpdates, "displayFirstName", () => {});
+  chai.spy.on(domUpdates, "displayMyBookings", () => {});
+  chai.spy.on(domUpdates, "displayFoundGuestInfo", () => {});
+  chai.spy.on(domUpdates, "displayTotalSpent", () => {});
 
   bookings = [
     {
@@ -19,14 +29,11 @@ beforeEach(() => {
       "date": "2020/02/04",
       "roomNumber": 15,
       "roomServiceCharges": [],
-      "roomInfo": {
-        "number": 15,
-        "roomType": "residential suite",
-        "bidet": false,
-        "bedSize": "full",
-        "numBeds": 1,
-        "costPerNight": 294.56
-      }
+      "roomType": "residential suite",
+      "bidet": false,
+      "bedSize": "full",
+      "numBeds": 1,
+      "costPerNight": 294.56
     },
     {
       "id": "5fwrgu4i7k55hl6t5",
@@ -34,14 +41,11 @@ beforeEach(() => {
       "date": "2020/01/24",
       "roomNumber": 24,
       "roomServiceCharges": [],
-      "roomInfo": {
-        "number": 24,
-        "roomType": "suite",
-        "bidet": false,
-        "bedSize": "queen",
-        "numBeds": 1,
-        "costPerNight": 327.24
-      }
+      "roomType": "suite",
+      "bidet": false,
+      "bedSize": "queen",
+      "numBeds": 1,
+      "costPerNight": 327.24
     },
     {
       "id": "5fwrgu4i7k55hl6t6",
@@ -49,14 +53,11 @@ beforeEach(() => {
       "date": "2020/01/10",
       "roomNumber": 12,
       "roomServiceCharges": [],
-      "roomInfo": {
-        "number": 12,
-        "roomType": "single room",
-        "bidet": false,
-        "bedSize": "twin",
-        "numBeds": 2,
-        "costPerNight": 172.09
-      }
+      "roomType": "single room",
+      "bidet": false,
+      "bedSize": "twin",
+      "numBeds": 2,
+      "costPerNight": 172.09
     },
     {
       "id": "5fwrgu4i7k55hl6t7",
@@ -64,14 +65,11 @@ beforeEach(() => {
       "date": "2020/02/16",
       "roomNumber": 7,
       "roomServiceCharges": [],
-      "roomInfo": {
-        "number": 7,
-        "roomType": "single room",
-        "bidet": false,
-        "bedSize": "queen",
-        "numBeds": 2,
-        "costPerNight": 231.46
-      }
+      "roomType": "single room",
+      "bidet": false,
+      "bedSize": "queen",
+      "numBeds": 2,
+      "costPerNight": 231.46
     },
     {
       "id": "5fwrgu4i7k55hl6t8",
@@ -79,14 +77,11 @@ beforeEach(() => {
       "date": "2020/02/05",
       "roomNumber": 1,
       "roomServiceCharges": [],
-      "roomInfo": {
-        "number": 1,
-        "roomType": "residential suite",
-        "bidet": true,
-        "bedSize": "queen",
-        "numBeds": 1,
-        "costPerNight": 358.4
-      }
+      "roomType": "residential suite",
+      "bidet": true,
+      "bedSize": "queen",
+      "numBeds": 1,
+      "costPerNight": 358.4
     },
     {
       "id": "5fwrgu4i7k55hl6t9",
@@ -94,14 +89,11 @@ beforeEach(() => {
       "date": "2020/02/14",
       "roomNumber": 4,
       "roomServiceCharges": [],
-      "roomInfo": {
-        "number": 4,
-        "roomType": "single room",
-        "bidet": false,
-        "bedSize": "queen",
-        "numBeds": 1,
-        "costPerNight": 429.44
-      }
+      "roomType": "single room",
+      "bidet": false,
+      "bedSize": "queen",
+      "numBeds": 1,
+      "costPerNight": 429.44
     }
   ]
 
@@ -181,9 +173,8 @@ beforeEach(() => {
   ]
 
   guest = new Guest(1, 'Leatha Ullrich', bookings)
+
 })
-
-
   it('should be a function', () => {
     expect(Guest).to.be.a('function')
   })
@@ -194,15 +185,21 @@ beforeEach(() => {
 
   it('should be able to get guest first name', () => {
     expect(guest.findFirstName()).to.equal('Leatha')
-
+    expect(domUpdates.displayFirstName).to.have.been.called(2)
   })
 
   it('should find a users bookings', () => {
     expect(guest.findMyBookings().length).to.equal(1)
+    expect(domUpdates.displayMyBookings).to.have.been.called(1)
+    expect(domUpdates.displayFoundGuestInfo).to.have.been.called(1)
   })
 
   it('should calculate total spent on hotel rooms', () => {
     expect(guest.calculateTotalSpent()).to.equal(358.40)
+    expect(domUpdates.displayTotalSpent).to.have.been.called(1)
+    expect(domUpdates.displayTotalSpent).to.have.been.called.with(358.40)
+
   })
 
-})
+
+});

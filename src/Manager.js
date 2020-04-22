@@ -1,19 +1,12 @@
-import Guest from '../src/Guest';
-import domUpdates from './domUpdates'
-import {hotelFetch} from './index'
-const moment = require('moment')
-import $ from 'jquery';
+// import {hotelFetch} from './index'
 
-
-class Manager extends Guest {
+class Manager {
   constructor(guests, id, name, rooms, bookings) {
-    super(id, name, rooms, bookings);
     this.guests = guests;
     this.id = id;
     this.name = name;
     this.bookings = bookings;
     this.rooms = rooms;
-    this.today = moment().format('YYYY/MM/DD');
   };
 
   deleteBooking(hotel) {
@@ -35,7 +28,7 @@ class Manager extends Guest {
 
   findGuestByName(name) {
     let guestName =  name.charAt(0).toUpperCase() + name.slice(1)
-    let foundGuest = this.guests.users.find(guest => guest.name.includes(guestName))
+    let foundGuest = this.guests.find(guest => guest.name.includes(guestName))
     return foundGuest
   };
 
