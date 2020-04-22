@@ -24,6 +24,8 @@ let guest;
 let currentGuest;
 $('.selected-date').val(calendarDateDisplay)
 $('.selected-date-manager').val(calendarDateDisplay)
+
+
 //LOGIN
 function checkLogin() {
   event.preventDefault();
@@ -41,7 +43,6 @@ function checkLogin() {
 
 //FETCH
 function managerFetch() {
-  console.log('managerfetch');
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .catch(error => console.log('userData error'))
@@ -56,9 +57,7 @@ function managerFetch() {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      console.log('data',data);
       guests = data[0];
-      console.log(guests);
       rooms = data[1];
       bookings = data[2];
       return guests
@@ -78,7 +77,6 @@ function managerFetch() {
 }
 
 function guestFetch(guestId) {
-  console.log('guestfetch');
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .catch(error => console.log('userData error'))
@@ -93,9 +91,7 @@ function guestFetch(guestId) {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      console.log('data',data);
       guests = data[0];
-      console.log(guests);
       rooms = data[1];
       bookings = data[2];
       return guests
@@ -103,11 +99,9 @@ function guestFetch(guestId) {
     .then(() => {
       hotel = new Hotel(guests, rooms, bookings, todayDate);
       hotel.setUpHotel();
-      // console.log('hotel', hotel);
     })
     .then(() => {
       let guest = instantiateGuest(guests, rooms, bookings, guestId)
-      // console.log('100', guest)
       displayGuestPage(guest)
     })
     .catch(error => {
@@ -116,7 +110,6 @@ function guestFetch(guestId) {
 }
 
 function managerGuestFetch(guestId) {
-  console.log('guestfetch');
   usersData = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .catch(error => console.log('userData error'))
@@ -131,9 +124,7 @@ function managerGuestFetch(guestId) {
 
   Promise.all([usersData, roomsData, bookingsData])
     .then(data => {
-      console.log('data',data);
       guests = data[0];
-      console.log(guests);
       rooms = data[1];
       bookings = data[2];
       return guests
@@ -141,7 +132,6 @@ function managerGuestFetch(guestId) {
     .then(() => {
       hotel = new Hotel(guests, rooms, bookings, todayDate);
       hotel.setUpHotel();
-      // console.log('hotel', hotel);
     })
     .then(() => {
       let guest = instantiateGuest(guests, rooms, bookings, guestId)
@@ -174,7 +164,6 @@ export function hotelFetch(date) {
     .then(() => {
       hotel = new Hotel(guests, rooms, bookings, date);
       hotel.setUpHotel();
-      console.log('hotel', hotel);
     })
     .catch(error => {
       console.log('Something is amiss with promise all', error)
@@ -191,12 +180,12 @@ $('.roomtype-dropdown').on('change', (event) => hotel.filterRoomsByType($('.room
 $('body').on('click', '.book-room-button', (event) => bookARoom(hotel))
 $('body').on('click', '.cancel-booking-button', (event) => deleteABooking())
 $('.search-guest-button').on('click', (event) => findGuestInfo())
+$('.return-to-bookings-button').on('click', (event) => domUpdates.hideBookingPage())
 
 
 function instantiateGuest(guests, rooms, bookings, guestId) {
   let guest = guests.users.find(guest => guest.id === +guestId)
   let guestBookings = bookings.bookings.filter(booking => booking.userID === +guestId)
-    console.log('guestBookings', guestBookings)
   let bookingInfo = guestBookings.forEach(booking => {
     rooms.rooms.forEach(room => {
       if (room.number === booking.roomNumber) {
@@ -273,6 +262,5 @@ function bookARoom(hotel) {
 }
 
 function deleteABooking(hotel) {
-  let guestId = currentGuest.id;
   manager.deleteBooking(hotel)
 }
